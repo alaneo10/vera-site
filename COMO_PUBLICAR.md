@@ -10,12 +10,14 @@
 2. Em *Source*, escolha **Deploy from a branch**, branch `main`, pasta `/ (root)`. Salve.
 3. Em 1–2 minutos o site estará em `https://SEU_USUARIO.github.io/vera-site/`.
 
-## 3. Domínio próprio (vera.org.br — verificado disponível em 12/06/2026)
-1. Registre em https://registro.br (~R$40/ano).
-2. No registro.br, em *DNS → Editar zona*, crie:
-   - `A` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - `CNAME` para `www` → `SEU_USUARIO.github.io.`
-3. No GitHub: **Settings → Pages → Custom domain** → digite `vera.org.br` e marque *Enforce HTTPS* (isso cria o arquivo `CNAME` automaticamente).
+## 3. Domínio próprio (somosvera.com.br — escolhido em 12/06/2026, registrável por CPF)
+1. Registre `somosvera.com.br` em https://registro.br (~R$40/ano).
+2. No registro.br, em *DNS → Editar zona* do domínio, crie:
+   - 4 registros `A` (nome em branco) → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - 1 registro `CNAME` com nome `www` → `alaneo10.github.io.`
+3. No GitHub (repo `vera-site`): **Settings → Pages → Custom domain** → digite `somosvera.com.br` → **Save**.
+4. Aguarde a verificação de DNS (pode levar de minutos a algumas horas) e então marque **Enforce HTTPS**.
+5. O site passa a responder em `https://somosvera.com.br` (e o endereço antigo `alaneo10.github.io/vera-site/` redireciona sozinho).
 
 ## 4. Formulário de e-mail (obrigatório antes de divulgar)
 O formulário usa o Formspree (gratuito até 50 envios/mês):
