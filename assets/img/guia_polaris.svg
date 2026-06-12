@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-75 -75 150 150" width="300" height="300">
+<title>Polaris — Amor · o que permanece</title>
+<style>
+  .nucleo, .assinatura { transform-box: fill-box; transform-origin: center; }
+  .estrelaTrilha { fill: #a5b4fc; animation: trilhaCintila 4.2s ease-in-out infinite; }
+  .estrelaTrilha.d1 { animation-delay: 1.4s; } .estrelaTrilha.d2 { animation-delay: 2.8s; }
+  @keyframes trilhaCintila { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .nucleo { animation: constante 6s ease-in-out infinite; }
+  @keyframes constante { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+  .anel { animation: anelRespira 6s ease-in-out infinite; }
+  @keyframes anelRespira { 0%,100% { opacity: 0.6; } 50% { opacity: 0.85; } }
+  .assinatura { animation: brilhoConstante 6s ease-in-out infinite; }
+  @keyframes brilhoConstante { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+</style>
+<g class="trilhas">
+  <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="70s" repeatCount="indefinite"/>
+  <path d="M-37,-15 A40,40 0 0 1 37,-15" fill="none" stroke="#6366f1" stroke-width="0.9" opacity="0.45"/>
+  <path d="M-50,14 A52,52 0 0 1 -14,-50" fill="none" stroke="#818cf8" stroke-width="0.9" opacity="0.4"/>
+  <path d="M61,-11 A62,62 0 0 1 19,59" fill="none" stroke="#818cf8" stroke-width="0.9" opacity="0.4"/>
+  <circle class="estrelaTrilha"    cx="37" cy="-15" r="2"/>
+  <circle class="estrelaTrilha d1" cx="-14" cy="-50" r="2"/>
+  <circle class="estrelaTrilha d2" cx="19" cy="59" r="2"/>
+</g>
+<g class="nucleo">
+  <circle r="24" fill="#4338ca" opacity="0.25"/>
+  <circle r="15" fill="#6366f1" opacity="0.5"/>
+  <circle r="9" fill="#818cf8"/>
+</g>
+<circle class="anel" r="28" fill="none" stroke="#818cf8" stroke-width="0.9"/>
+<path class="assinatura" d="M0,-13 L1.9,-1.9 L13,0 L1.9,1.9 L0,13 L-1.9,1.9 L-13,0 L-1.9,-1.9 Z" fill="#eef2ff"/>
+</svg>

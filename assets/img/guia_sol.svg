@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-75 -75 150 150" width="300" height="300">
+<title>Sol — Vida · calor que cuida</title>
+<style>
+  .raio { stroke: #d97706; stroke-width: 2; stroke-linecap: round; animation: raioPulsa 3.2s ease-in-out infinite; }
+  .raio.d1 { animation-delay: 0.4s; } .raio.d2 { animation-delay: 0.8s; }
+  .raio.d3 { animation-delay: 1.2s; } .raio.d4 { animation-delay: 1.6s; }
+  .raio.d5 { animation-delay: 2.0s; } .raio.d6 { animation-delay: 2.4s; }
+  .raio.d7 { animation-delay: 2.8s; }
+  @keyframes raioPulsa { 0%,100% { opacity: 0.35; } 50% { opacity: 0.85; } }
+  .halo { transform-box: fill-box; transform-origin: center; animation: respira 4.5s ease-in-out infinite; }
+  @keyframes respira { 0%,100% { transform: scale(1); opacity: 0.2; } 50% { transform: scale(1.06); opacity: 0.3; } }
+  .nucleo { transform-box: fill-box; transform-origin: center; animation: nucleoRespira 4.5s ease-in-out infinite; }
+  @keyframes nucleoRespira { 0%,100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+  .assinatura { transform-box: fill-box; transform-origin: center; animation: cintila 2.6s ease-in-out infinite; }
+  @keyframes cintila { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.75; } }
+</style>
+<g class="giro">
+  <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="90s" repeatCount="indefinite"/>
+  <line class="raio"    x1="0" y1="-64" x2="0" y2="-52"/>
+  <line class="raio d1" x1="45" y1="-45" x2="37" y2="-37"/>
+  <line class="raio d2" x1="64" y1="0" x2="52" y2="0"/>
+  <line class="raio d3" x1="45" y1="45" x2="37" y2="37"/>
+  <line class="raio d4" x1="0" y1="64" x2="0" y2="52"/>
+  <line class="raio d5" x1="-45" y1="45" x2="-37" y2="37"/>
+  <line class="raio d6" x1="-64" y1="0" x2="-52" y2="0"/>
+  <line class="raio d7" x1="-45" y1="-45" x2="-37" y2="-37"/>
+</g>
+<circle class="halo" r="46" fill="#d97706" opacity="0.2"/>
+<g class="nucleo">
+  <circle r="34" fill="#d97706" opacity="0.45"/>
+  <circle r="23" fill="#f59e0b"/>
+  <circle r="12" fill="#fbbf24"/>
+</g>
+<path class="assinatura" d="M0,-9 L1.3,-1.3 L9,0 L1.3,1.3 L0,9 L-1.3,1.3 L-9,0 L-1.3,-1.3 Z" fill="#fffbeb"/>
+</svg>

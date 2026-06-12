@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-55 -55 110 110" width="120" height="120">
+<title>Símbolo de VERA — estrela de quatro pontas dentro de um círculo</title>
+<style>
+  .aro { animation: aroRespira 5s ease-in-out infinite; }
+  @keyframes aroRespira { 0%,100% { opacity: 0.5; } 50% { opacity: 0.85; } }
+  .estrela { transform-box: fill-box; transform-origin: center; animation: estrelaViva 5s ease-in-out infinite; }
+  @keyframes estrelaViva { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+</style>
+<circle class="aro" r="50" fill="none" stroke="#818cf8" stroke-width="1.5"/>
+<g class="estrela">
+  <path d="M0,-34 L5,-5 L0,0 Z" fill="#fcd34d"/>
+  <path d="M0,-34 L-5,-5 L0,0 Z" fill="#b45309"/>
+  <path d="M34,0 L5,-5 L0,0 Z" fill="#b45309"/>
+  <path d="M34,0 L5,5 L0,0 Z" fill="#fcd34d"/>
+  <path d="M0,34 L-5,5 L0,0 Z" fill="#fcd34d"/>
+  <path d="M0,34 L5,5 L0,0 Z" fill="#b45309"/>
+  <path d="M-34,0 L-5,5 L0,0 Z" fill="#b45309"/>
+  <path d="M-34,0 L-5,-5 L0,0 Z" fill="#fcd34d"/>
+</g>
+</svg>

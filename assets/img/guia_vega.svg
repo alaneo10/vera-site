@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-80 -75 160 150" width="300" height="300">
+<title>Vega — Rede · a Tecelã do céu</title>
+<style>
+  .fio { stroke: #7c3aed; animation: fioPulsa 4s ease-in-out infinite; }
+  .fio.d1 { animation-delay: 0.6s; } .fio.d2 { animation-delay: 1.2s; }
+  .fio.d3 { animation-delay: 1.8s; } .fio.d4 { animation-delay: 2.4s; }
+  .fio.d5 { animation-delay: 3.0s; }
+  @keyframes fioPulsa { 0%,100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+  .no { fill: #c4b5fd; animation: noCintila 3.3s ease-in-out infinite; }
+  .no.d1 { animation-delay: 0.5s; } .no.d2 { animation-delay: 1.0s; }
+  .no.d3 { animation-delay: 1.5s; } .no.d4 { animation-delay: 2.0s; }
+  .no.d5 { animation-delay: 2.5s; }
+  @keyframes noCintila { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .centro, .assinatura { transform-box: fill-box; transform-origin: center; }
+  .centro { animation: centroRespira 4s ease-in-out infinite; }
+  @keyframes centroRespira { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+  .assinatura { animation: cintila 2.8s ease-in-out infinite; }
+  @keyframes cintila { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.75; } }
+</style>
+<line class="fio"    x1="0" y1="0" x2="-65" y2="-25" stroke-width="0.9"/>
+<line class="fio d1" x1="0" y1="0" x2="62" y2="-38" stroke-width="0.9"/>
+<line class="fio d2" x1="0" y1="0" x2="-70" y2="22" stroke-width="0.9"/>
+<line class="fio d3" x1="0" y1="0" x2="70" y2="18" stroke-width="0.9"/>
+<line class="fio d4" x1="0" y1="0" x2="-28" y2="-46" stroke-width="0.9"/>
+<line class="fio d5" x1="0" y1="0" x2="30" y2="44" stroke-width="0.9"/>
+<line class="fio d2" x1="-65" y1="-25" x2="-28" y2="-46" stroke-width="0.6"/>
+<line class="fio d4" x1="70" y1="18" x2="30" y2="44" stroke-width="0.6"/>
+<line class="fio d1" x1="62" y1="-38" x2="70" y2="18" stroke-width="0.6"/>
+<circle class="no"    cx="-65" cy="-25" r="3"/>
+<circle class="no d1" cx="62" cy="-38" r="2.5"/>
+<circle class="no d2" cx="-70" cy="22" r="2.5"/>
+<circle class="no d3" cx="70" cy="18" r="3"/>
+<circle class="no d4" cx="-28" cy="-46" r="2"/>
+<circle class="no d5" cx="30" cy="44" r="2.5"/>
+<g class="centro">
+  <circle r="20" fill="#93c5fd" opacity="0.2"/>
+  <circle r="13" fill="#93c5fd" opacity="0.5"/>
+  <circle r="9" fill="#bfdbfe"/>
+</g>
+<path class="assinatura" d="M0,-8 L1.2,-1.2 L8,0 L1.2,1.2 L0,8 L-1.2,1.2 L-8,0 L-1.2,-1.2 Z" fill="#f8fafc"/>
+</svg>
