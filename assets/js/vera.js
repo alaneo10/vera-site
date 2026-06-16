@@ -5,6 +5,13 @@
   /* Caminho relativo até a raiz do site (páginas estão todas na raiz) */
   var IMG = 'assets/img/';
 
+  /* Carrega o módulo de chat com o Guia (se ainda não estiver na página) */
+  if (!window.VERAChat) {
+    var sChat = document.createElement('script');
+    sChat.src = 'assets/js/vera_chat.js';
+    document.head.appendChild(sChat);
+  }
+
   /* ---------- Céu estrelado ---------- */
   var ceu = document.createElement('div');
   ceu.className = 'estrelas';
@@ -288,14 +295,14 @@
     caminharCom: function () {
       var key = E.escolhido;
       VERA.fecharModal();
-      var destino = 'index.html?guia=' + key + '#lista';
-      /* Se a página atual tem o formulário, não recarrega */
-      if (document.getElementById('lista')) {
-        VERA.marcarGuiaNoForm(key);
-        document.getElementById('lista').scrollIntoView({ behavior: 'smooth' });
-        history.replaceState(null, '', '?guia=' + key + '#lista');
+      /* Abre a conversa com o Guia escolhido */
+      if (window.VERAChat) {
+        window.VERAChat.abrir(key, GUIAS[key]);
       } else {
-        window.location.href = destino;
+        /* Fallback: chat ainda carregando — tenta de novo em instantes */
+        setTimeout(function () {
+          if (window.VERAChat) window.VERAChat.abrir(key, GUIAS[key]);
+        }, 300);
       }
     },
     marcarGuiaNoForm: function (key) {
