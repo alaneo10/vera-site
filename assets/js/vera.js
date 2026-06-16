@@ -188,6 +188,7 @@
         cont.querySelectorAll('.op').forEach(function (x) { x.classList.remove('ok'); });
         b.classList.add('ok');
         E[chave] = op.g;
+        E[chave + 'Txt'] = op.t;
         document.getElementById(btnId).disabled = false;
       };
       cont.appendChild(b);
@@ -198,6 +199,7 @@
   window.VERA = {
     abrirModal: function () {
       E.ramo = E.q1 = E.q2 = E.q3 = null;
+      E.q1Txt = E.q2Txt = null;
       modal.classList.add('aberto');
       document.body.classList.add('modal-travado');
       VERA.irTela('mt0');
@@ -217,6 +219,7 @@
       btn.classList.add('ok');
       E.ramo = ramo;
       E.q1 = E.q2 = null;
+      E.q1Txt = E.q2Txt = null;
       carregarPerg('mp2q', 'mp2ops', 'mbtn2', PERGUNTAS[ramo][0], 'q1');
       setTimeout(function () { VERA.irTela('mt2'); }, 280);
     },
@@ -292,18 +295,25 @@
       });
       VERA.irTela('mtCat');
     },
+    montarContexto: function () {
+      var partes = [];
+      if (E.ramo === 'a') partes.push('Chegou atravessando um momento difícil.');
+      else if (E.ramo === 'b') partes.push('Veio explorar ideias novas e conhecer VERA.');
+      if (E.q1Txt) partes.push('Sobre o momento de vida, indicou: "' + E.q1Txt + '".');
+      if (E.q2Txt) partes.push('Sobre o que ajuda/quer explorar, indicou: "' + E.q2Txt + '".');
+      return partes.join(' ');
+    },
     caminharCom: function () {
       var key = E.escolhido;
+      var ctx = VERA.montarContexto();
+      var ramo = E.ramo;
       VERA.fecharModal();
-      /* Abre a conversa com o Guia escolhido */
-      if (window.VERAChat) {
-        window.VERAChat.abrir(key, GUIAS[key]);
-      } else {
-        /* Fallback: chat ainda carregando — tenta de novo em instantes */
-        setTimeout(function () {
-          if (window.VERAChat) window.VERAChat.abrir(key, GUIAS[key]);
-        }, 300);
+      /* Abre a conversa com o Guia escolhido, com o contexto do quiz */
+      function abrir() {
+        if (window.VERAChat) window.VERAChat.abrir(key, GUIAS[key], ctx, ramo);
       }
+      if (window.VERAChat) abrir();
+      else setTimeout(abrir, 300); /* fallback: chat ainda carregando */
     },
     marcarGuiaNoForm: function (key) {
       var g = GUIAS[key];

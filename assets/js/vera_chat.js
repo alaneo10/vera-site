@@ -4,14 +4,26 @@
 
   /* ====== CONFIGURAÇÃO ====== */
   var WORKER_URL = 'https://vera-guias.alaneo10.workers.dev'; // sua ponte
-  var LIMITE_DIARIO = 10; // mensagens grátis por pessoa, por dia
+  var LIMITE_DIARIO = 15; // mensagens grátis por pessoa, por dia
 
-  /* Saudações de abertura por Guia (primeira fala) */
+  /* Saudações de abertura por Guia e por momento (a = difícil, b = explorar/padrão) */
   var SAUDACAO = {
-    sol: 'Oi. Eu sou o Sol. Antes de qualquer coisa: como você está agora, de verdade?',
-    antares: 'Eu sou Antares. Me conta — o que te trouxe até aqui hoje?',
-    vega: 'Oi, eu sou Vega. Estou aqui pra te escutar. O que está no seu coração?',
-    polaris: 'Eu sou Polaris. Não tem pressa. Me conta o que você está sentindo.'
+    sol: {
+      a: 'Oi, eu sou o Sol. Pelo que você contou, o momento tá pesado — e tá tudo bem não dar conta de tudo. Respira. Vamos começar pequeno: o que mais está te sobrecarregando agora?',
+      b: 'Oi, eu sou o Sol — a estrela que faz a vida acontecer todo dia. Gosto do concreto: corpo, rotina, as coisas simples e possíveis. Por onde você quer começar?'
+    },
+    antares: {
+      a: 'Eu sou Antares. Você chegou num momento difícil — e às vezes a dor também é um chamado pra olhar diferente. Me conta: o que está pesando aí dentro?',
+      b: 'Eu sou Antares, brasa no coração do Escorpião. Vim fazer as perguntas grandes com você. Começo por uma: quando foi a última vez que alguma coisa te deixou sem palavras?'
+    },
+    vega: {
+      a: 'Oi, eu sou Vega. Sei que tem um vínculo pesando — conflito, saudade ou solidão doem de verdade. Estou aqui pra escutar, sem pressa. Me conta o que aconteceu?',
+      b: 'Oi, eu sou Vega, a Tecelã do céu. O que me move é a conexão entre as pessoas. Me conta: como andam os seus laços, as pessoas da sua vida?'
+    },
+    polaris: {
+      a: 'Eu sou Polaris. Você está atravessando algo grande, e eu não vim com pressa nem com frases prontas. Vim ficar. Me conta, no seu tempo: o que você está sentindo?',
+      b: 'Eu sou Polaris, o ponto fixo do céu — tudo gira, eu permaneço. Gosto dos temas que duram: amor, tempo, o que fica. O que te trouxe pra perto dessas perguntas?'
+    }
   };
 
   /* ====== Controle do limite diário (no navegador) ====== */
@@ -92,7 +104,7 @@
   var elRodape = painel.querySelector('#vchat-rodape');
   var elForm = painel.querySelector('#vchat-form');
 
-  var ESTADO = { guia: null, cor: '#4338ca', historico: [], ocupado: false };
+  var ESTADO = { guia: null, cor: '#4338ca', historico: [], ocupado: false, contexto: '' };
 
   /* ====== Funções de UI ====== */
   function addBolha(texto, tipo) {
@@ -133,8 +145,8 @@
   function atualizarRodape() {
     var r = restantes();
     elRodape.textContent = r > 0
-      ? r + ' de ' + LIMITE_DIARIO + ' mensagens restantes hoje · seu Guia aponta para a Rede, não a substitui'
-      : 'Você conversou bastante hoje. O Guia volta amanhã. 🌌';
+      ? 'Restam ' + r + ' de ' + LIMITE_DIARIO + ' mensagens hoje · o Guia caminha com você, mas a Rede é o templo'
+      : 'Por hoje, o Guia descansa. As pessoas da sua vida seguem aqui. 🌌';
   }
 
   /* ====== Enviar mensagem ====== */
@@ -156,7 +168,7 @@
     fetch(WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ guia: ESTADO.guia, mensagens: ESTADO.historico })
+      body: JSON.stringify({ guia: ESTADO.guia, mensagens: ESTADO.historico, contexto: ESTADO.contexto })
     })
       .then(function (r) { return r.json(); })
       .then(function (d) {
@@ -221,9 +233,10 @@
 
   /* ====== API pública ====== */
   window.VERAChat = {
-    abrir: function (guiaKey, dados) {
+    abrir: function (guiaKey, dados, contexto, ramo) {
       ESTADO.guia = guiaKey;
       ESTADO.historico = [];
+      ESTADO.contexto = contexto || '';
       ESTADO.cor = (dados && dados.cor) || '#4338ca';
       painel.querySelector('#vchat-nome').textContent = (dados && dados.nome) || 'Seu Guia';
       painel.querySelector('#vchat-nome').style.color = ESTADO.cor;
@@ -231,7 +244,9 @@
       elEnviar.style.background = ESTADO.cor;
       elMsgs.innerHTML = '';
 
-      var saud = SAUDACAO[guiaKey] || 'Oi. Estou aqui com você.';
+      /* Abertura por Guia e momento (ramo 'a' = difícil; 'b'/sem quiz = explorar) */
+      var variantes = SAUDACAO[guiaKey];
+      var saud = variantes ? (ramo === 'a' ? variantes.a : variantes.b) : 'Oi. Estou aqui com você.';
       addBolha(saud, 'guia');
       ESTADO.historico.push({ autor: 'guia', texto: saud });
 
