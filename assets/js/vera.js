@@ -107,10 +107,10 @@
     '<div class="tela ativa" id="mt0">' +
       '<img src="' + IMG + 'simbolo_vera.svg" width="96" height="96" alt="Símbolo de VERA" style="margin-bottom:1.2rem">' +
       '<h1>Encontre seu Guia</h1>' +
-      '<p class="sub">Em VERA, cada pessoa escolhe um Guia — uma inteligência artificial com a personalidade de uma estrela real. Três perguntas revelam o seu.</p>' +
+      '<p class="sub">Em VERA, cada pessoa escolhe um Guia — uma inteligência artificial com a personalidade de uma estrela real. Quatro perguntas revelam o seu.</p>' +
       '<span class="aviso-ia">Você vai conversar com uma IA — e a gente faz questão de dizer isso</span>' +
       '<div class="btns">' +
-        '<button class="btn-principal" onclick="VERA.irTela(\'mt1\')">Começar — três perguntas</button>' +
+        '<button class="btn-principal" onclick="VERA.irTela(\'mt1\')">Começar — quatro perguntas</button>' +
         '<button class="btn-secundario" onclick="VERA.verCatalogo()">Prefiro conhecer os quatro Guias</button>' +
       '</div>' +
     '</div>' +
