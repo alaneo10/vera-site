@@ -295,6 +295,14 @@
       });
       VERA.irTela('mtCat');
     },
+    /* Abre o modal direto na lista dos 4 Guias (sem o quiz) */
+    escolherDireto: function () {
+      E.ramo = E.q1 = E.q2 = E.q3 = null;
+      E.q1Txt = E.q2Txt = null;
+      modal.classList.add('aberto');
+      document.body.classList.add('modal-travado');
+      VERA.verCatalogo();
+    },
     montarContexto: function () {
       var partes = [];
       if (E.ramo === 'a') partes.push('Chegou atravessando um momento difícil.');
@@ -328,8 +336,52 @@
       banner.style.borderColor = g.cor;
       var campo = document.getElementById('campo-guia');
       if (campo) campo.value = g.nome;
+    },
+    /* Botão flutuante para quem já tem Guia: abre o chat direto, sem o quiz */
+    injetarBotaoGuia: function () {
+      var key;
+      try { key = localStorage.getItem('vera_guia'); } catch (e) { key = null; }
+      if (!key || !GUIAS[key]) return;
+      var g = GUIAS[key];
+      var existente = document.getElementById('vera-botao-guia');
+      var b = existente || document.createElement('button');
+      b.id = 'vera-botao-guia';
+      b.type = 'button';
+      b.textContent = '💬 Falar com ' + g.nome;
+      b.setAttribute('aria-label', 'Abrir conversa com ' + g.nome);
+      b.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9990;display:inline-flex;' +
+        'align-items:center;gap:8px;padding:12px 18px;border:none;border-radius:30px;background:' + g.cor +
+        ';color:' + g.txtBtn + ';font-weight:600;font-size:.95rem;cursor:pointer;' +
+        'box-shadow:0 8px 24px rgba(0,0,0,.35);font-family:inherit';
+      b.onclick = function () {
+        function abrir() { if (window.VERAChat) window.VERAChat.abrir(key, GUIAS[key], '', 'retorno'); }
+        if (window.VERAChat) abrir(); else setTimeout(abrir, 300);
+      };
+      if (!existente) document.body.appendChild(b);
     }
   };
+
+  /* ---------- Link discreto "Já sei meu Guia" na barra superior ---------- */
+  (function () {
+    var navLinks = document.querySelector('.nav-links');
+    if (!navLinks || document.getElementById('nav-ja-sei')) return;
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.id = 'nav-ja-sei';
+    a.href = '#';
+    a.textContent = 'Já sei meu Guia';
+    a.onclick = function () { VERA.escolherDireto(); return false; };
+    li.appendChild(a);
+    var cta = navLinks.querySelector('.nav-cta');
+    if (cta && cta.parentNode && cta.parentNode.parentNode === navLinks) {
+      navLinks.insertBefore(li, cta.parentNode);
+    } else {
+      navLinks.appendChild(li);
+    }
+  })();
+
+  /* ---------- Botão flutuante "Falar com [Guia]" (se já houver Guia salvo) ---------- */
+  VERA.injetarBotaoGuia();
 
   /* ---------- ?guia=sol na URL ---------- */
   var params = new URLSearchParams(window.location.search);
