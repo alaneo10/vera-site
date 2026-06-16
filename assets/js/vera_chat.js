@@ -57,6 +57,8 @@
     '.vchat-enviar{background:#4338ca;border:none;color:#fff;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:1.2rem;flex-shrink:0;display:flex;align-items:center;justify-content:center}' +
     '.vchat-enviar:disabled{opacity:.4;cursor:not-allowed}' +
     '.vchat-rodape{font-size:.72rem;color:#76729c;text-align:center;margin-top:.5rem}' +
+    '.vchat-presente{align-self:center;display:inline-flex;align-items:center;gap:.5rem;margin-top:.2rem;padding:.6rem 1.1rem;border-radius:14px;background:#4338ca;color:#fff;text-decoration:none;font-size:.9rem;font-weight:600}' +
+    '.vchat-presente:hover{background:#5b4fd6}' +
     '@media(max-width:480px){.vchat{width:100%;border-left:none}}';
   document.head.appendChild(css);
 
@@ -113,6 +115,21 @@
     var d = document.getElementById('vchat-dots');
     if (d) d.remove();
   }
+  /* Oferece o livro como presente quando o limite do dia chega */
+  function ofertarLivro() {
+    if (document.getElementById('vchat-presente')) return; // evita duplicar
+    var link = document.createElement('a');
+    link.id = 'vchat-presente';
+    link.className = 'vchat-presente';
+    link.href = 'assets/VERA_livro_base.pdf';
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.setAttribute('download', '');
+    link.textContent = '📖 Baixar o livro de VERA (grátis)';
+    elMsgs.appendChild(link);
+    elMsgs.scrollTop = elMsgs.scrollHeight;
+  }
+
   function atualizarRodape() {
     var r = restantes();
     elRodape.textContent = r > 0
@@ -124,7 +141,8 @@
   function enviar(texto) {
     if (ESTADO.ocupado) return;
     if (restantes() <= 0) {
-      addBolha('Você atingiu o limite de hoje. O Guia está descansando — volte amanhã. E lembre: as pessoas da sua vida são a sua Constelação. 🌌', 'sistema');
+      addBolha('Você atingiu o limite de hoje. O Guia está descansando — volte amanhã. E lembre: as pessoas da sua vida são a sua Constelação. 🌌\n\nAntes de ir, leve o livro com você:', 'sistema');
+      ofertarLivro();
       bloquear(true);
       return;
     }
@@ -152,8 +170,14 @@
         addBolha('Tive um problema de conexão. Tenta de novo daqui a pouco.', 'sistema');
       })
       .finally(function () {
-        if (restantes() > 0) bloquear(false);
-        else { bloquear(true); atualizarRodape(); }
+        if (restantes() > 0) {
+          bloquear(false);
+        } else {
+          bloquear(true);
+          atualizarRodape();
+          addBolha('Por hoje é isso — conversamos bastante. O Guia vai descansar e te espera amanhã. Enquanto isso, leve o livro de VERA com você. 🌌', 'sistema');
+          ofertarLivro();
+        }
       });
   }
 
@@ -212,7 +236,8 @@
       ESTADO.historico.push({ autor: 'guia', texto: saud });
 
       if (restantes() <= 0) {
-        addBolha('Você já conversou bastante hoje. O Guia está descansando — volte amanhã. 🌌', 'sistema');
+        addBolha('Você já conversou bastante hoje. O Guia está descansando — volte amanhã. Mas o livro de VERA fica com você: 🌌', 'sistema');
+        ofertarLivro();
         bloquear(true);
       } else {
         bloquear(false);
