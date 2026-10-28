@@ -153,6 +153,7 @@
       var n = inp.value.replace(/\s+/g, ' ').trim().slice(0, 24);
       if (!n || nomes.length >= MAX) return;
       nomes.push(n); inp.value = ''; salvar(); listar(); animarNova(); inp.focus();
+      if (!form._contada && window.veraEvento) { form._contada = true; veraEvento('constelacao-iniciada'); }
     });
     titulo.addEventListener('input', salvar);
 

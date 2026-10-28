@@ -70,6 +70,7 @@
   function iniciar() {
     var sec = document.getElementById('zoom'); if (!sec) return;
     var cv = document.getElementById('zoom-canvas'), g = cv.getContext('2d');
+    var marcados = {};
     var intro = document.getElementById('zoom-intro'), entrada = document.getElementById('zoom-preocupacao');
     var frase = document.getElementById('zoom-frase'), escala = document.getElementById('zoom-escala'), ponto = document.getElementById('zoom-ponto');
     var W, H, dpr, pedido = false, fraseAtual = '';
@@ -179,6 +180,7 @@
       /* legendas */
       intro.style.opacity = e.fase === 'intro' ? 1 : 0;
       intro.style.visibility = e.fase === 'intro' ? 'visible' : 'hidden';
+      if ((e.fase === 'topo' || e.fase === 'fim') && !marcados[e.fase]) { marcados[e.fase] = true; if (window.veraEvento) veraEvento('zoom-' + e.fase); }
       var nova = '';
       if (e.fase === 'sobe') { for (var f = 0; f < T.f.length; f++) { if (e.lg < T.f[f][0]) { nova = T.f[f][1]; break; } } }
       else if (e.fase === 'topo') nova = T.respire;

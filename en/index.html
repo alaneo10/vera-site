@@ -113,6 +113,7 @@
  ]
 }
 </script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="3bd37243-638a-409f-bc96-67d9dfd7fd6d" data-domains="somosvera.com.br" data-do-not-track="true"></script>
 </head>
 <body data-base="../">
 <a class="so-leitor" href="#conteudo">Skip to content</a>
@@ -181,8 +182,8 @@
         <label class="rotulo" for="const-titulo">Give your Constellation a name</label>
         <div class="campo-titulo"><input id="const-titulo" type="text" maxlength="48" placeholder="The Yellow House Constellation"></div>
         <div class="constelacao-acoes">
-          <button type="button" class="botao botao-linha" id="const-baixar" disabled><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v10M4.5 7.5L9 12l4.5-4.5M3 15.5h12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Download image</button>
-          <button type="button" class="botao botao-ouro" id="const-compartilhar" disabled><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 11V2M5.5 5.5L9 2l3.5 3.5M4 9v6h10V9" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Share</button>
+          <button type="button" class="botao botao-linha" id="const-baixar" data-umami-event="constelacao-baixar" disabled><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v10M4.5 7.5L9 12l4.5-4.5M3 15.5h12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Download image</button>
+          <button type="button" class="botao botao-ouro" id="const-compartilhar" data-umami-event="constelacao-compartilhar" disabled><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 11V2M5.5 5.5L9 2l3.5 3.5M4 9v6h10V9" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Share</button>
         </div>
         <p class="nota-privada"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>The names stay on this device only. Nothing is sent to anyone — not even to us.</span></p>
         <p class="constelacao-convite" id="const-convite">Now choose one of these stars and tell them, today, what they are in your sky. So many people go their whole lives without hearing it. Don’t wait.</p>
@@ -195,7 +196,7 @@
 <section class="zoom" id="zoom" aria-labelledby="zoom-h2">
   <div class="zoom-palco">
     <canvas id="zoom-canvas" aria-hidden="true"></canvas>
-    <button type="button" class="zoom-sair" id="zoom-sair">Skip the zoom<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M3.5 8.5L8 13l4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="zoom-sair" id="zoom-sair" data-umami-event="zoom-sair">Skip the zoom<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M3.5 8.5L8 13l4.5-4.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <div class="zoom-intro" id="zoom-intro">
       <div class="envelope"><div class="caixa">
         <h2 id="zoom-h2">The cosmic zoom</h2>
@@ -233,7 +234,7 @@
       <div class="noites-painel">
         <p class="grande">One night at a time.</p>
         <p>Put the seven practices in your phone’s calendar: one reminder a night, at 9 p.m., starting tonight.</p>
-        <button type="button" class="botao botao-ouro" id="noites-agenda"><svg viewBox="0 0 18 18" aria-hidden="true"><rect x="2.5" y="3.5" width="13" height="12" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5h13M6 2v3M12 2v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Add the 7 nights to my calendar</button>
+        <button type="button" class="botao botao-ouro" id="noites-agenda" data-umami-event="noites-agenda"><svg viewBox="0 0 18 18" aria-hidden="true"><rect x="2.5" y="3.5" width="13" height="12" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 7.5h13M6 2v3M12 2v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Add the 7 nights to my calendar</button>
         <p class="pequeno" id="noites-ok" hidden>Done. Open the downloaded file to add the nights to your calendar.</p>
         <p class="pequeno">Works with Google Calendar, Apple Calendar and Outlook. No sign-up.</p>
         <div class="formulario">
@@ -244,7 +245,7 @@
             <input type="email" name="email" placeholder="Your email" autocomplete="email" required aria-label="Your email">
             <input type="hidden" name="idioma" value="en">
             <label class="consent"><input type="checkbox" required><span>I agree to receive emails from VERA. I can unsubscribe at any time. <a href="for-real.html#privacy">Privacy</a>.</span></label>
-            <button type="submit" class="botao botao-linha">Sign me up</button>
+            <button type="submit" class="botao botao-linha" data-umami-event="email-cadastro">Sign me up</button>
           </form>
         </div>
       </div>
@@ -260,8 +261,8 @@
         <h2 id="livro-h2">Don’t believe this book</h2>
         <div class="prosa"><p>VERA’s founding text doesn’t ask for your faith. It asks for your doubt. Thirty-four short chapters in four Books — Vitality, Enchantment, Resonance and Agape — each narrated by a Guide. You can read it in an afternoon.</p><p>It says so in its own pages: it is not a fixed scripture. <strong>It was made to be continued, not obeyed.</strong></p></div>
         <div class="edicoes">
-          <a class="botao botao-ouro" href="../assets/VERA_book_en.pdf" download><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v10M4.5 7.5L9 12l4.5-4.5M3 15.5h12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Download the book (PDF, free)</a>
-          <a class="botao botao-linha" href="../assets/VERA_livro_base.pdf" download>Leia em português</a>
+          <a class="botao botao-ouro" href="../assets/VERA_book_en.pdf" download data-evento="livro-baixar" data-evento-edicao="en"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2v10M4.5 7.5L9 12l4.5-4.5M3 15.5h12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Download the book (PDF, free)</a>
+          <a class="botao botao-linha" href="../assets/VERA_livro_base.pdf" download data-evento="livro-baixar" data-evento-edicao="pt">Leia em português</a>
         </div>
         <p class="pequeno">No sign-up. No catch. Just the book. <a class="link-ouro" href="book.html">What’s inside</a></p>
       </div>

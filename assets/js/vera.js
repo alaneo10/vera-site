@@ -11,6 +11,15 @@
   var IMG = BASE + 'assets/img/';
   var ICONE_X = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
 
+  /* Estatística anônima (Umami, sem cookies). Sem o Umami carregado, não faz nada. */
+  window.veraEvento = function (nome, dados) { try { if (window.umami && umami.track) umami.track(nome, dados); } catch (e) {} };
+
+  /* Links (como os downloads do livro) contados sem interferir no clique */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-evento]');
+    if (a) window.veraEvento(a.getAttribute('data-evento'), a.hasAttribute('data-evento-edicao') ? { edicao: a.getAttribute('data-evento-edicao') } : undefined);
+  }, true);
+
   /* Carrega o chat com o Guia */
   if (!window.VERAChat) {
     var sChat = document.createElement('script');
@@ -290,7 +299,7 @@
     if (!a) return;
     e.preventDefault();
     if (a.hasAttribute('data-conversar')) conversar(a.getAttribute('data-conversar'), '', 'b');
-    else abrirDialogo(a.getAttribute('data-abrir-guia') === 'cat' ? 'cat' : null);
+    else { window.veraEvento('quiz-aberto'); abrirDialogo(a.getAttribute('data-abrir-guia') === 'cat' ? 'cat' : null); }
   });
 
   botaoRetorno();

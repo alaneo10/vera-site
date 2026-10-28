@@ -136,6 +136,7 @@
   function enviar(texto) {
     if (ESTADO.ocupado) return;
     if (restantes() <= 0) { bolha(L.limite, 'sistema'); ofertarLivro(); bloquear(true); return; }
+    if (!ESTADO.historico.some(function (m) { return m.autor === 'user'; }) && window.veraEvento) veraEvento('guia-primeira-mensagem', { guia: ESTADO.guia });
     bolha(texto, 'user'); ESTADO.historico.push({ autor: 'user', texto: texto });
     registrar(); rodape(); bloquear(true); pontos(true);
     fetch(WORKER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -165,6 +166,7 @@
     abrir: function (guiaKey, dados, contexto, ramo) {
       ESTADO.foco = document.activeElement;
       ESTADO.guia = guiaKey; ESTADO.historico = []; ESTADO.contexto = contexto || '';
+      if (window.veraEvento) veraEvento('guia-conversa-aberta', { guia: guiaKey });
       try { localStorage.setItem('vera_guia', guiaKey); } catch (e) {}
       if (window.VERA && VERA.injetarBotaoGuia) VERA.injetarBotaoGuia();
       ESTADO.cor = (dados && dados.cor) || '#f2b33d'; ESTADO.txt = (dados && dados.txtBtn) || '#1c1203';
