@@ -290,6 +290,15 @@ em { font-style: italic; }
 .zoom-frase { font-family: var(--serif); font-style: italic; font-size: clamp(1.5rem, 3vw, 2.4rem); line-height: 1.2; max-width: 22ch; transition: opacity 0.4s ease; text-shadow: 0 2px 24px rgba(10, 9, 32, 0.9); }
 .zoom-escala { font-size: 0.82rem; color: var(--tinta-3); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .zoom-escala b { display: block; font-family: var(--serif); font-size: 1.6rem; font-weight: 500; color: var(--tinta); font-style: italic; }
+.zoom-sair {
+  position: absolute; z-index: 3; top: clamp(5rem, 11vh, 6.5rem); right: clamp(1.25rem, 4vw, 2.5rem);
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border-radius: 999px;
+  background: rgba(10, 9, 32, 0.7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border: 1px solid var(--linha-forte); color: var(--tinta-2); font: 500 0.84rem/1 var(--sans); cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.zoom-sair:hover, .zoom-sair:focus-visible { color: var(--tinta); border-color: var(--ouro); }
+.zoom-sair svg { width: 14px; height: 14px; }
 .zoom-barra { position: absolute; z-index: 2; right: clamp(1rem, 3vw, 2rem); top: 50%; transform: translateY(-50%); width: 2px; height: 34vh; background: var(--linha); }
 .zoom-barra span { position: absolute; left: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--ouro); transform: translateY(-50%); }
 @media (max-width: 760px) { .zoom-legenda .envelope { flex-direction: column; align-items: flex-start; } .zoom-escala { text-align: left; } .zoom-barra { display: none; } }
@@ -339,7 +348,7 @@ em { font-style: italic; }
 
 /* ---------- Livro ---------- */
 .livro { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: center; }
-.livro-capa { box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--linha); border-radius: 3px; transform: rotate(-2deg); transition: transform 0.5s ease; }
+.livro-capa { box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--linha); border-radius: 3px; transform: rotate(-2deg); transition: transform 0.5s ease; width: 100%; height: auto; aspect-ratio: 5 / 8; object-fit: cover; }
 .livro-capa:hover { transform: rotate(0deg) translateY(-4px); }
 .livro h2 { font-size: clamp(2.3rem, 5.2vw, 4.4rem); font-style: italic; margin-bottom: 1.2rem; }
 .livro .prosa p + p { margin-top: 1rem; }
@@ -494,3 +503,4 @@ body.modal-travado { overflow: hidden; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 .modal-caixa h2:focus, .modal-caixa [tabindex="-1"]:focus { outline: none; }
+h2[tabindex="-1"]:focus { outline: none; }

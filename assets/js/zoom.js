@@ -199,6 +199,16 @@
     entrada.addEventListener('keydown', function (ev) {
       if (ev.key === 'Enter') { ev.preventDefault(); window.scrollBy({ top: window.innerHeight * 0.9, behavior: 'smooth' }); }
     });
+    /* botão para sair do zoom: salta direto para a seção seguinte */
+    var sair = document.getElementById('zoom-sair');
+    if (sair) sair.addEventListener('click', function () {
+      var depois = sec.nextElementSibling;
+      var alvo = depois ? depois.getBoundingClientRect().top + window.scrollY : sec.offsetTop + sec.offsetHeight;
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo(0, alvo);
+      document.documentElement.style.scrollBehavior = '';
+      if (depois) { var h = depois.querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+    });
     var go = function () { pedir(); };
     if (document.fonts && document.fonts.load) document.fonts.load('italic 500 20px "Bodoni Moda"').then(go, go); else go();
   }
