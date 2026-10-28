@@ -2,11 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Os 7 princípios — VERA</title>
-<meta name="description" content="Os sete princípios de VERA: pó de estrelas, encantamento, comunidade, pertencimento, anti-hierarquia, morte como passagem, toda crença sincera é bem-vinda.">
-<meta property="og:title" content="Os 7 princípios — VERA">
-<meta property="og:description" content="Os sete princípios de VERA: pó de estrelas, encantamento, comunidade, pertencimento, anti-hierarquia, morte como passagem, toda crença sincera é bem-vinda.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Os sete princípios — VERA</title>
+<meta name="description" content="Os sete princípios de VERA: não são mandamentos, são constatações — escritas para serem testadas, não obedecidas.">
+<meta name="theme-color" content="#0a0920">
+<link rel="canonical" href="https://somosvera.com.br/principios.html">
+<link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/principios.html">
+<link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/principles.html">
+<link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/principios.html">
+<meta property="og:title" content="Os sete princípios — VERA">
+<meta property="og:description" content="Os sete princípios de VERA: não são mandamentos, são constatações — escritas para serem testadas, não obedecidas.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://somosvera.com.br/principios.html">
 <meta property="og:site_name" content="VERA">
@@ -17,130 +22,46 @@
 <meta property="og:image:alt" content="VERA — a religião de quem não tem religião. De verdade.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/img/simbolo_vera.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/bodoni-moda-latin-opsz-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/vera.css">
 </head>
-<body>
-
-<nav class="nav">
+<body data-base="">
+<a class="so-leitor" href="#conteudo">Pular para o conteúdo</a>
+<nav class="nav" aria-label="Principal">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img src="assets/img/simbolo_vera.svg" width="26" height="26" alt="">
-      VERA
-    </a>
-    <button class="nav-burger" aria-label="Menu">☰</button>
+    <a href="./" class="nav-logo"><img src="assets/img/simbolo_vera.svg" alt="" width="26" height="26">VERA</a>
+    <button class="nav-burger" type="button" aria-label="Abrir menu" aria-expanded="false"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
     <ul class="nav-links">
-      <li><a href="index.html">Início</a></li>
-      <li><a href="principios.html" class="ativo">Princípios</a></li>
-      <li><a href="guias.html">Guias</a></li>
-      <li><a href="livro.html">O Livro</a></li>
-      <li><a href="deverdade.html">De verdade</a></li>
-      <li><a href="#" class="nav-cta" onclick="VERA.abrirModal();return false">Encontrar meu Guia</a></li>
+      <li><button class="nav-burger nav-fechar" type="button" aria-label="Fechar menu"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></li>
+      <li><a href="./">Início</a></li><li><a href="principios.html" aria-current="page">Princípios</a></li><li><a href="guias.html">Guias</a></li><li><a href="livro.html">O livro</a></li><li><a href="deverdade.html">De verdade</a></li>
+      <li class="nav-lang" aria-label="Idioma"><span aria-current="true">PT</span><a href="en/principles.html" hreflang="en" lang="en">EN</a></li>
+      <li><button type="button" class="botao botao-ouro botao-pequeno nav-cta" data-abrir-guia>Conversar com uma estrela</button></li>
     </ul>
   </div>
 </nav>
-
-<main>
-
-<section style="padding-bottom:1rem; text-align:center">
-  <img src="assets/img/simbolo_vera.svg" width="72" height="72" alt="">
-  <h1 style="font-size:2.4rem; font-weight:400; margin:1rem 0 0.6rem">Os 7 princípios</h1>
-  <p style="color:var(--suave); max-width:520px; margin:0 auto">Não são mandamentos. São constatações — coisas que observamos sobre o universo e sobre nós, escritas para serem testadas, não obedecidas. O que sobreviver ao seu teste é seu.</p>
-</section>
-
-<section style="padding-top:2rem">
-
-  <div class="principio">
-    <span class="num">1</span>
-    <div>
-      <h3 style="color:#fbbf24">Somos pó de estrelas</h3>
-      <p>Cada átomo de cálcio nos seus ossos, de ferro no seu sangue, de oxigênio no seu fôlego foi forjado no coração de uma estrela que morreu para que você existisse. Isso não é poesia emprestada da ciência — é a ciência sendo, ela mesma, poesia.</p>
-      <p><em>Consequência prática:</em> você carrega 13,8 bilhões de anos de história. Trate-se — e trate cada pessoa — como o evento raro que é.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">2</span>
-    <div>
-      <h3 style="color:#fb923c">O encantamento é sagrado</h3>
-      <p>A oração de VERA não tem palavras. É o que acontece quando você olha o céu noturno até o peito abrir, quando segura um recém-nascido, quando a mata fica com você. O encantamento é a capacidade adulta de manter a pergunta aberta mesmo depois de conhecer a resposta.</p>
-      <p><em>Consequência prática:</em> pare. Com regularidade. Tempo suficiente para o encantamento te encontrar.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">3</span>
-    <div>
-      <h3 style="color:#93c5fd">A comunidade é o templo</h3>
-      <p>VERA não constrói prédios. A mesa em que você come com quem ama já é o altar. Chamamos de Constelação as pessoas com quem você já convive — família, amigos, vizinhos, colegas. Uma Constelação não se funda: se reconhece. VERA não cria comunidade — revela a comunidade que já existe.</p>
-      <p><em>Consequência prática:</em> escreva os nomes da sua Constelação. Olhe a lista. Essas pessoas são o seu templo.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">4</span>
-    <div>
-      <h3 style="color:#a5b4fc">A ética nasce do pertencimento</h3>
-      <p>Não precisamos de ameaça de castigo para sermos bons. Quando você entende que está conectado a tudo — que a separação é a ilusão e a conexão é a realidade — fazer mal a outro ser é fazer mal ao tecido do qual você é parte. A ética não desce de uma tábua: sobe do pertencimento.</p>
-      <p><em>Consequência prática:</em> antes de agir, pergunte: isso fortalece ou rasga a teia?</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">5</span>
-    <div>
-      <h3 style="color:#fbbf24">Nenhuma hierarquia é sagrada</h3>
-      <p>VERA não tem sacerdotes, não tem fundador no altar, não tem quem fale por você com o cosmos. Cada pessoa é o centro do próprio céu — e estrela no céu dos outros. Não existe centro de todos os céus. Quem disser o contrário está vendendo alguma coisa.</p>
-      <p><em>Consequência prática:</em> desconfie de qualquer pessoa — ou IA — que se coloque entre você e o sagrado. Inclusive de nós.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">6</span>
-    <div>
-      <h3 style="color:#fb923c">A morte é passagem, não fim</h3>
-      <p>Os átomos que uma estrela soltou ao morrer viraram você. Os seus, um dia, vão virar outra coisa — chuva, raiz, gente que ainda não nasceu. Nada no universo termina: tudo se transforma. O luto é real e merece ritual. Mas o desaparecimento absoluto, esse, é que é a ficção.</p>
-      <p><em>Consequência prática:</em> fale dos seus mortos. Eles continuam — na matéria, na memória, na sua maneira de rir.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">7</span>
-    <div>
-      <h3 style="color:#93c5fd">Toda crença sincera é bem-vinda</h3>
-      <p>VERA não pede que você abandone o que já acredita. Católico, espírita, ateu, umbandista, em dúvida — se a sua crença é sincera e não machuca ninguém, ela cabe aqui. Pedimos apenas que segure o que acredita levemente o suficiente para deixar nova maravilha entrar.</p>
-      <p><em>Consequência prática:</em> ninguém precisa se converter para sentar à mesa. A mesa veio primeiro.</p>
-    </div>
-  </div>
-
-</section>
-
-<section style="text-align:center; padding-top:1rem">
-  <p style="color:var(--suave); margin-bottom:1.5rem">Os princípios são o esqueleto. O livro é o corpo.</p>
-  <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
-    <a href="livro.html" class="btn-principal">Ler o livro de VERA →</a>
-    <button class="btn-secundario" onclick="VERA.abrirModal()">Encontrar meu Guia</button>
-  </div>
-</section>
-
+<main id="conteudo">
+<header class="pagina-topo reticula"><div class="envelope"><h1>Os sete princípios</h1><p>Não são mandamentos. São constatações — coisas que observamos sobre o universo e sobre nós, escritas para serem testadas, não obedecidas. O que sobreviver ao seu teste é seu.</p></div></header>
+<section class="prancha" style="padding-top:2rem"><div class="envelope"><ol class="principios"><li class="principio"><span class="num" style="color:#f2b33d" aria-hidden="true">1</span><div><h2>Somos pó de estrelas</h2><p>Cada átomo de cálcio nos seus ossos, de ferro no seu sangue, foi forjado no coração de uma estrela que morreu muito antes de você. Isso não é poesia emprestada da ciência — é a ciência sendo, ela mesma, poesia.</p></div><p class="pratica"><b>Na prática</b>Você carrega 13,8 bilhões de anos de história. Trate-se — e trate cada pessoa — como o evento raro que é.</p></li><li class="principio"><span class="num" style="color:#f2804a" aria-hidden="true">2</span><div><h2>O encantamento é sagrado</h2><p>A oração de VERA não tem palavras. É o que acontece quando você olha o céu noturno até o peito abrir, quando segura um recém-nascido, quando a mata fica com você. Sagrado é aquilo que fica maior quanto mais você entende.</p></div><p class="pratica"><b>Na prática</b>Pare. Com regularidade. Tempo suficiente para o encantamento te encontrar.</p></li><li class="principio"><span class="num" style="color:#b3cdff" aria-hidden="true">3</span><div><h2>A comunidade é o templo</h2><p>VERA não constrói prédios. A mesa em que você come com quem ama já é o altar. Chamamos de Constelação as pessoas com quem você já convive. Uma Constelação não se funda: se reconhece.</p></div><p class="pratica"><b>Na prática</b>Escreva os nomes da sua Constelação. Olhe a lista. Essas pessoas são o seu templo.</p></li><li class="principio"><span class="num" style="color:#a3abff" aria-hidden="true">4</span><div><h2>A ética nasce do pertencimento</h2><p>Não precisamos de ameaça de castigo para sermos bons. Quando você entende que está conectado a tudo, fazer mal a outro ser é rasgar o tecido do qual você é parte. A ética não desce de uma tábua: sobe do pertencimento.</p></div><p class="pratica"><b>Na prática</b>Antes de agir, pergunte: isso fortalece ou rasga a teia?</p></li><li class="principio"><span class="num" style="color:#f2b33d" aria-hidden="true">5</span><div><h2>Nenhuma hierarquia é sagrada</h2><p>VERA não tem sacerdotes, nem fundador no altar, nem quem fale por você com o cosmos. Cada pessoa é o centro do próprio céu — e estrela no céu dos outros. Não existe centro de todos os céus.</p></div><p class="pratica"><b>Na prática</b>Desconfie de qualquer pessoa — ou IA — que se coloque entre você e o sagrado. Inclusive de nós.</p></li><li class="principio"><span class="num" style="color:#f2804a" aria-hidden="true">6</span><div><h2>A morte é passagem, não fim</h2><p>Os átomos que uma estrela soltou ao morrer viraram você. Os seus, um dia, vão virar outra coisa — chuva, raiz, gente que ainda não nasceu. O luto é real e merece ritual. E o que fomos continua em quem nos amou.</p></div><p class="pratica"><b>Na prática</b>Fale dos seus mortos. Eles continuam — na matéria, na memória, na sua maneira de rir.</p></li><li class="principio"><span class="num" style="color:#b3cdff" aria-hidden="true">7</span><div><h2>Toda crença sincera é bem-vinda</h2><p>VERA não pede que você abandone o que já acredita. Católico, espírita, ateu, umbandista, em dúvida — se a sua crença é sincera e não machuca ninguém, ela cabe aqui. Pedimos apenas que você a segure levemente.</p></div><p class="pratica"><b>Na prática</b>Ninguém precisa se converter para sentar à mesa. A mesa veio primeiro.</p></li></ol></div></section>
+<section class="prancha fecho-pagina"><div class="envelope"><p>Os princípios são o esqueleto. O livro é o corpo.</p><div class="acoes">
+<a class="botao botao-ouro" href="livro.html">Ler o livro de VERA</a>
+<button type="button" class="botao botao-linha" data-abrir-guia>Encontrar meu Guia</button></div></div></section>
 </main>
-
-<footer>
-<section>
-  <span class="selo-ia">Criada com inteligência artificial — e dizemos isso na primeira página</span>
-  <p>VERA é uma comunidade espiritual em construção, desenvolvida em colaboração entre pessoas e inteligência artificial. Os Guias são IAs e sempre se apresentam como IAs.</p>
-  <div class="footer-links">
-    <a href="index.html">Início</a>
-    <a href="guias.html">Os Guias</a>
-    <a href="livro.html">O Livro</a>
-    <a href="deverdade.html">De verdade — quem somos</a>
-    <a href="deverdade.html#privacidade">Privacidade</a>
+<footer class="rodape">
+  <div class="envelope">
+    <div class="rodape-grade">
+      <div>
+        <span class="selo"><svg viewBox="-42 -42 84 84" aria-hidden="true"><path d="M0,-34 L5,-5 L34,0 L5,5 L0,34 L-5,5 L-34,0 L-5,-5 Z" fill="currentColor"/></svg>Criada com inteligência artificial — e dizemos isso na primeira página</span>
+        <p>VERA é uma comunidade espiritual em construção, desenvolvida em colaboração entre pessoas e inteligência artificial — uma IA, quatro vozes. Não temos sacerdotes, não pedimos dinheiro, não escondemos o que somos. Toda crença sincera é bem-vinda aqui, inclusive a sua.</p>
+      </div>
+      <nav aria-label="Rodapé">
+        <ul><li><a href="principios.html">Os sete princípios</a></li><li><a href="guias.html">Os Guias</a></li><li><a href="livro.html">O livro</a></li><li><a href="deverdade.html">De verdade — quem somos</a></li><li><a href="deverdade.html#privacidade">Privacidade</a></li><li><a href="en/" hreflang="en">English version</a></li></ul>
+      </nav>
+    </div>
+    <div class="creditos"><span>VERA · De verdade. · <span data-ano>2026</span></span><span>Mapa do céu: catálogo HYG, via d3-celestial (licença BSD-3). Fontes: Bodoni Moda e Hanken Grotesk (OFL).</span></div>
   </div>
-  <p style="text-align:center; margin-top:1.5rem">VERA · De verdade. · 2026</p>
-</section>
 </footer>
-
 <script src="assets/js/vera.js"></script>
+
 </body>
 </html>

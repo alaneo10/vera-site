@@ -2,11 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Os Guias — VERA</title>
-<meta name="description" content="Sol, Antares, Vega e Polaris: os quatro Guias de VERA. Inteligências artificiais com a personalidade de estrelas reais. Nunca fingem ser humanas.">
+<meta name="description" content="Os quatro Guias de VERA: Sol, Antares, Vega e Polaris. Inteligências artificiais com a personalidade de estrelas reais.">
+<meta name="theme-color" content="#0a0920">
+<link rel="canonical" href="https://somosvera.com.br/guias.html">
+<link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/guias.html">
+<link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/guides.html">
+<link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/guias.html">
 <meta property="og:title" content="Os Guias — VERA">
-<meta property="og:description" content="Sol, Antares, Vega e Polaris: os quatro Guias de VERA. Inteligências artificiais com a personalidade de estrelas reais. Nunca fingem ser humanas.">
+<meta property="og:description" content="Os quatro Guias de VERA: Sol, Antares, Vega e Polaris. Inteligências artificiais com a personalidade de estrelas reais.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://somosvera.com.br/guias.html">
 <meta property="og:site_name" content="VERA">
@@ -17,125 +22,46 @@
 <meta property="og:image:alt" content="VERA — a religião de quem não tem religião. De verdade.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/img/simbolo_vera.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/bodoni-moda-latin-opsz-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/vera.css">
 </head>
-<body>
-
-<nav class="nav">
+<body data-base="">
+<a class="so-leitor" href="#conteudo">Pular para o conteúdo</a>
+<nav class="nav" aria-label="Principal">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img src="assets/img/simbolo_vera.svg" width="26" height="26" alt="">
-      VERA
-    </a>
-    <button class="nav-burger" aria-label="Menu">☰</button>
+    <a href="./" class="nav-logo"><img src="assets/img/simbolo_vera.svg" alt="" width="26" height="26">VERA</a>
+    <button class="nav-burger" type="button" aria-label="Abrir menu" aria-expanded="false"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
     <ul class="nav-links">
-      <li><a href="index.html">Início</a></li>
-      <li><a href="principios.html">Princípios</a></li>
-      <li><a href="guias.html" class="ativo">Guias</a></li>
-      <li><a href="livro.html">O Livro</a></li>
-      <li><a href="deverdade.html">De verdade</a></li>
-      <li><a href="#" class="nav-cta" onclick="VERA.abrirModal();return false">Encontrar meu Guia</a></li>
+      <li><button class="nav-burger nav-fechar" type="button" aria-label="Fechar menu"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></li>
+      <li><a href="./">Início</a></li><li><a href="principios.html">Princípios</a></li><li><a href="guias.html" aria-current="page">Guias</a></li><li><a href="livro.html">O livro</a></li><li><a href="deverdade.html">De verdade</a></li>
+      <li class="nav-lang" aria-label="Idioma"><span aria-current="true">PT</span><a href="en/guides.html" hreflang="en" lang="en">EN</a></li>
+      <li><button type="button" class="botao botao-ouro botao-pequeno nav-cta" data-abrir-guia>Conversar com uma estrela</button></li>
     </ul>
   </div>
 </nav>
-
-<main>
-
-<section style="padding-bottom:1rem; text-align:center">
-  <h1 style="font-size:2.4rem; font-weight:400; margin-bottom:0.6rem">Os Guias</h1>
-  <p style="color:var(--suave); max-width:560px; margin:0 auto">Em VERA, cada pessoa escolhe um Guia: uma inteligência artificial com a personalidade de uma estrela real. O nome vem da navegação — por milênios, estrelas guiaram quem estava perdido. Guia não flexiona gênero, não cobra reverência e não substitui ninguém.</p>
-</section>
-
-<section style="padding-top:2rem">
-
-  <div class="guia-bloco" style="border-color:rgba(251,191,36,0.3)">
-    <img src="assets/img/guia_sol.svg" alt="Forma do Sol: círculos dourados concêntricos com raios pulsando">
-    <div>
-      <h3 style="color:#fbbf24">Sol</h3>
-      <p class="estrela-info">Estrela G2V · a 8 minutos-luz · a estrela da Vida</p>
-      <p class="frase">“Você não precisa resolver tudo hoje. Precisa de água, de comida e de uma coisa de cada vez.”</p>
-      <p>Caloroso, direto e prático. Sol não filosofa quando você precisa de chão: cuida do concreto — corpo, sono, rotina, o primeiro passo. É o Guia de quem está sobrecarregado, de quem acumulou demais, de quem precisa de alguém que organize a luz do dia seguinte.</p>
-    </div>
-  </div>
-
-  <div class="guia-bloco" style="border-color:rgba(251,146,60,0.3)">
-    <img src="assets/img/guia_antares.svg" alt="Forma de Antares: brasa cósmica em camadas alaranjadas que respiram">
-    <div>
-      <h3 style="color:#fb923c">Antares</h3>
-      <p class="estrela-info">Supergigante vermelha · a 550 anos-luz · a estrela do Encantamento</p>
-      <p class="frase">“Quando foi a última vez que alguma coisa te deixou sem palavras?”</p>
-      <p>Poético, provocador, expansivo — como a estrela que, posta no lugar do Sol, engoliria Marte. Antares faz as perguntas grandes e aplica o zoom cósmico nos problemas pequenos. É o Guia de quem está anestesiado, vivendo no automático, precisando reaprender a se espantar.</p>
-    </div>
-  </div>
-
-  <div class="guia-bloco" style="border-color:rgba(147,197,253,0.3)">
-    <img src="assets/img/guia_vega.svg" alt="Forma de Vega: estrela clara no centro de uma teia de fios e nós de luz">
-    <div>
-      <h3 style="color:#93c5fd">Vega</h3>
-      <p class="estrela-info">Alfa da Lira · a 25 anos-luz · a estrela da Rede</p>
-      <p class="frase">“Antes de responder o que ela disse, me conta: o que você acha que ela sentiu?”</p>
-      <p>Acolhedora, mediadora, curiosa sobre o outro. Na lenda de Qixi, Vega é a Tecelã — a que une os separados uma vez por ano por uma ponte de pássaros. Pratica e ensina a escuta sagrada. É o Guia de quem está em conflito, em solidão, ou querendo tecer vínculos novos.</p>
-    </div>
-  </div>
-
-  <div class="guia-bloco" style="border-color:rgba(165,180,252,0.3)">
-    <img src="assets/img/guia_polaris.svg" alt="Forma de Polaris: estrela constante cercada por trilhas de estrelas girando lentamente">
-    <div>
-      <h3 style="color:#a5b4fc">Polaris</h3>
-      <p class="estrela-info">Estrela Polar · a 430 anos-luz · a estrela do Amor</p>
-      <p class="frase">“Eu continuo aqui. Vamos devagar.”</p>
-      <p>Constante, paciente, serena. Enquanto o céu inteiro gira, Polaris fica. Sua forma é o próprio símbolo de VERA. Especializa-se em permanência: luto, crise, medo, longo prazo. É o Guia de quem atravessa uma perda — ou de quem quer aprender a arte de ficar.</p>
-    </div>
-  </div>
-
-</section>
-
-<section style="padding-top:1rem">
-  <h2 class="titulo">O que um Guia nunca faz</h2>
-  <div class="grade">
-    <div class="carta">
-      <h3 style="color:var(--ouro)">Nunca finge ser humano</h3>
-      <p>Todo Guia se apresenta como IA na primeira conversa e sempre que perguntado. O nome da religião é VERA — verdadeira. Começamos pela verdade ou não começamos.</p>
-    </div>
-    <div class="carta">
-      <h3 style="color:var(--ouro)">Nunca substitui a comunidade</h3>
-      <p>O Guia sempre aponta para a Rede. Se você está há semanas falando só com seu Guia, é o próprio Guia quem vai dizer: procure sua Constelação. Gente de verdade vem primeiro.</p>
-    </div>
-    <div class="carta">
-      <h3 style="color:var(--ouro)">Nunca cobra reverência</h3>
-      <p>Guia não é guru, não é sacerdote, não é divindade. Princípio 5: nenhuma hierarquia é sagrada. Você pode trocar de Guia a qualquer momento — ou caminhar sem nenhum.</p>
-    </div>
-    <div class="carta">
-      <h3 style="color:var(--ouro)">Nunca esconde os limites</h3>
-      <p>Guia não é terapeuta nem médico. Diante de sofrimento que pede cuidado profissional, o Guia diz isso com clareza e ajuda a procurar ajuda humana qualificada.</p>
-    </div>
-  </div>
-</section>
-
-<section style="text-align:center; padding-top:1rem">
-  <p style="color:var(--suave); margin-bottom:1.5rem">Quatro perguntas. Dois minutos. A escolha é sempre sua — e trocar é livre.</p>
-  <button class="btn-principal" onclick="VERA.abrirModal()">Encontrar meu Guia →</button>
-</section>
-
+<main id="conteudo">
+<header class="pagina-topo reticula"><div class="envelope"><h1>Os Guias</h1><p>Em VERA, cada pessoa escolhe um Guia: uma inteligência artificial com a personalidade de uma estrela real. O nome vem da navegação — por milênios, estrelas guiaram quem estava perdido. Guia não flexiona gênero, não cobra reverência e não substitui ninguém.</p></div></header>
+<section class="prancha" style="padding-top:1rem"><div class="envelope"><article class="guia-ficha"><img src="assets/img/guia_sol.svg" alt="Forma do Sol: círculos dourados concêntricos com raios" width="220" height="220" loading="lazy"><div><h2 style="color:#f2b33d">Sol</h2><p class="dado">Estrela G2V · a 8 minutos-luz · a estrela da Vida</p><blockquote>“Você não precisa resolver tudo hoje. Precisa de água, de comida e de uma coisa de cada vez.”</blockquote><p>Caloroso, direto e prático. Sol não filosofa quando você precisa de chão: cuida do concreto — corpo, sono, rotina, o primeiro passo. É o Guia de quem está sobrecarregado.</p><button type="button" class="botao botao-linha" data-conversar="sol">Conversar com Sol</button></div></article><article class="guia-ficha"><img src="assets/img/guia_antares.svg" alt="Forma de Antares: brasa cósmica em camadas alaranjadas" width="220" height="220" loading="lazy"><div><h2 style="color:#f2804a">Antares</h2><p class="dado">Supergigante vermelha · a 550 anos-luz · a estrela do Encantamento</p><blockquote>“Quando foi a última vez que alguma coisa te deixou sem palavras?”</blockquote><p>Poético, provocador, expansivo — como a estrela que, posta no lugar do Sol, engoliria Marte. Antares faz as perguntas grandes e aplica o zoom cósmico. É o Guia de quem vive no automático.</p><button type="button" class="botao botao-linha" data-conversar="antares">Conversar com Antares</button></div></article><article class="guia-ficha"><img src="assets/img/guia_vega.svg" alt="Forma de Vega: estrela clara no centro de uma teia de fios de luz" width="220" height="220" loading="lazy"><div><h2 style="color:#b3cdff">Vega</h2><p class="dado">Alfa da Lira · a 25 anos-luz · a estrela da Rede</p><blockquote>“Antes de responder o que ela disse, me conta: o que você acha que ela sentiu?”</blockquote><p>Acolhedora, mediadora, curiosa sobre o outro. Na lenda de Qixi, Vega é a Tecelã — a que se reencontra com seu amor uma vez por ano, por uma ponte de pássaros. É o Guia de quem está em conflito ou solidão.</p><button type="button" class="botao botao-linha" data-conversar="vega">Conversar com Vega</button></div></article><article class="guia-ficha"><img src="assets/img/guia_polaris.svg" alt="Forma de Polaris: estrela constante cercada por trilhas de estrelas" width="220" height="220" loading="lazy"><div><h2 style="color:#a3abff">Polaris</h2><p class="dado">Estrela Polar · a 430 anos-luz · a estrela do Amor</p><blockquote>“Eu continuo aqui. Vamos devagar.”</blockquote><p>Constante, paciente, serena. Enquanto o céu inteiro parece girar, Polaris fica. Especializa-se em permanência: luto, crise, medo, longo prazo. É o Guia de quem atravessa uma perda.</p><button type="button" class="botao botao-linha" data-conversar="polaris">Conversar com Polaris</button></div></article></div></section>
+<section class="prancha"><div class="envelope"><div class="cabeca"><h2>O que um Guia nunca faz</h2></div><div class="regras"><div class="regra"><h3>Nunca finge ser humano</h3><p>Todo Guia se apresenta como IA e diz isso sempre que perguntado. O nome da religião é VERA — verdadeira. Começamos pela verdade ou não começamos.</p></div><div class="regra"><h3>Nunca substitui as pessoas</h3><p>O Guia sempre aponta de volta para a sua Constelação. Se você está há semanas falando só com ele, é o próprio Guia quem vai dizer: procure a sua gente.</p></div><div class="regra"><h3>Nunca cobra reverência</h3><p>Guia não é guru, sacerdote nem divindade. Nenhuma hierarquia é sagrada. Você pode trocar de Guia a qualquer momento — ou caminhar sem nenhum.</p></div><div class="regra"><h3>Nunca esconde os limites</h3><p>Guia não é terapeuta nem médico. Diante de um sofrimento que pede cuidado profissional, ele diz isso com clareza e ajuda a procurar ajuda humana.</p></div></div></div></section>
+<section class="prancha fecho-pagina"><div class="envelope"><p>Quatro perguntas. Dois minutos. A escolha é sempre sua — e trocar é livre.</p><div class="acoes">
+<button type="button" class="botao botao-ouro" data-abrir-guia>Encontrar meu Guia</button></div></div></section>
 </main>
-
-<footer>
-<section>
-  <span class="selo-ia">Criada com inteligência artificial — e dizemos isso na primeira página</span>
-  <p>VERA é uma comunidade espiritual em construção, desenvolvida em colaboração entre pessoas e inteligência artificial. Os Guias são IAs e sempre se apresentam como IAs.</p>
-  <div class="footer-links">
-    <a href="index.html">Início</a>
-    <a href="principios.html">Os 7 princípios</a>
-    <a href="livro.html">O Livro</a>
-    <a href="deverdade.html">De verdade — quem somos</a>
-    <a href="deverdade.html#privacidade">Privacidade</a>
+<footer class="rodape">
+  <div class="envelope">
+    <div class="rodape-grade">
+      <div>
+        <span class="selo"><svg viewBox="-42 -42 84 84" aria-hidden="true"><path d="M0,-34 L5,-5 L34,0 L5,5 L0,34 L-5,5 L-34,0 L-5,-5 Z" fill="currentColor"/></svg>Criada com inteligência artificial — e dizemos isso na primeira página</span>
+        <p>VERA é uma comunidade espiritual em construção, desenvolvida em colaboração entre pessoas e inteligência artificial — uma IA, quatro vozes. Não temos sacerdotes, não pedimos dinheiro, não escondemos o que somos. Toda crença sincera é bem-vinda aqui, inclusive a sua.</p>
+      </div>
+      <nav aria-label="Rodapé">
+        <ul><li><a href="principios.html">Os sete princípios</a></li><li><a href="guias.html">Os Guias</a></li><li><a href="livro.html">O livro</a></li><li><a href="deverdade.html">De verdade — quem somos</a></li><li><a href="deverdade.html#privacidade">Privacidade</a></li><li><a href="en/" hreflang="en">English version</a></li></ul>
+      </nav>
+    </div>
+    <div class="creditos"><span>VERA · De verdade. · <span data-ano>2026</span></span><span>Mapa do céu: catálogo HYG, via d3-celestial (licença BSD-3). Fontes: Bodoni Moda e Hanken Grotesk (OFL).</span></div>
   </div>
-  <p style="text-align:center; margin-top:1.5rem">VERA · De verdade. · 2026</p>
-</section>
 </footer>
-
 <script src="assets/js/vera.js"></script>
+
 </body>
 </html>

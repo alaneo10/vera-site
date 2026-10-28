@@ -1,43 +1,28 @@
-# Como publicar o site de VERA (GitHub Pages)
+# Como publicar o site de VERA
 
-## 1. Criar o repositório
-1. Crie uma conta em https://github.com (se ainda não tiver).
-2. Crie um repositório novo chamado, por exemplo, `vera-site` (público).
-3. Envie **o conteúdo desta pasta `site/`** para o repositório (pode arrastar os arquivos pela interface web do GitHub: *Add file → Upload files*). A estrutura deve ficar com `index.html` na raiz do repositório.
+O site está no repositório `alaneo10/vera-site` (GitHub Pages, domínio `somosvera.com.br`).
+Esta pasta (`vera-site`) é o clone local, ligada ao GitHub Desktop.
 
-## 2. Ativar o GitHub Pages
-1. No repositório: **Settings → Pages**.
-2. Em *Source*, escolha **Deploy from a branch**, branch `main`, pasta `/ (root)`. Salve.
-3. Em 1–2 minutos o site estará em `https://SEU_USUARIO.github.io/vera-site/`.
+## Publicar uma alteração (GitHub Desktop)
+1. Abra o **GitHub Desktop**. O repositório atual deve ser `vera-site`.
+2. Na aba **Changes**, confira a lista de arquivos alterados.
+3. Embaixo, à esquerda, escreva um resumo (ex.: "Novo site: o céu") e clique em **Commit to main**.
+4. Clique em **Push origin** (barra superior).
+5. Em 1 a 2 minutos o site atualiza em https://somosvera.com.br. Se não aparecer, recarregue com Ctrl+F5.
 
-## 3. Domínio próprio (somosvera.com.br — escolhido em 12/06/2026, registrável por CPF)
-1. Registre `somosvera.com.br` em https://registro.br (~R$40/ano).
-2. No registro.br, em *DNS → Editar zona* do domínio, crie:
-   - 4 registros `A` (nome em branco) → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - 1 registro `CNAME` com nome `www` → `alaneo10.github.io.`
-3. No GitHub (repo `vera-site`): **Settings → Pages → Custom domain** → digite `somosvera.com.br` → **Save**.
-4. Aguarde a verificação de DNS (pode levar de minutos a algumas horas) e então marque **Enforce HTTPS**.
-5. O site passa a responder em `https://somosvera.com.br` (e o endereço antigo `alaneo10.github.io/vera-site/` redireciona sozinho).
+## Onde mexer
+- **Textos das páginas**: não edite os `.html` à mão. Edite
+  `05_Site_planejamento/gerador_site.py` (fora deste repositório) e rode
+  `python3 gerador_site.py <caminho-desta-pasta>`. Ele regenera as 10 páginas (PT na raiz, EN em `/en/`).
+- **Visual**: `assets/css/vera.css`.
+- **Interações**: `assets/js/` — `ceu.js` (céu real no topo), `constelacao.js` (Desenhe sua Constelação),
+  `zoom.js` (zoom cósmico), `noites.js` (7 noites → agenda), `vera.js` (menu e escolha do Guia),
+  `vera_chat.js` (conversa com os Guias). `ceu_dados.js` é o catálogo de estrelas (não editar).
+- **Livros**: `assets/VERA_livro_base.pdf` (PT) e `assets/VERA_book_en.pdf` (EN). Basta substituir o arquivo.
+- **Guias (IA)**: `guias/worker.js` roda na Cloudflare (vera-guias.alaneo10.workers.dev). Alterá-lo aqui
+  não muda nada no ar: é preciso colar o código no painel da Cloudflare e clicar em Deploy.
 
-## 4. Formulário de e-mail (obrigatório antes de divulgar)
-O formulário usa o Formspree (gratuito até 50 envios/mês):
-1. Crie conta em https://formspree.io e um formulário novo.
-2. Copie o ID (algo como `xqkrwdpz`).
-3. No `index.html`, substitua `SEU_ID_FORMSPREE` na linha do `<form action=...>`.
-
-## 5. Atualizar o livro
-O PDF servido é `assets/VERA_livro_base.pdf`. Para atualizar, basta substituir o arquivo e reenviar.
-
-## Estrutura
-```
-index.html        Página inicial (hero + manifesto + guias + livro + cadastro)
-principios.html   Os 7 princípios expandidos
-guias.html        Os 4 Guias em detalhe + o que um Guia nunca faz
-livro.html        Página do livro + download
-deverdade.html    Transparência (IA), FAQ e privacidade
-assets/css/vera.css   Estilo compartilhado
-assets/js/vera.js     Céu estrelado, menu e modal de escolha do Guia
-assets/img/*.svg      Símbolo e os 4 Guias (animados)
-assets/VERA_livro_base.pdf
-```
-O modal "Encontrar meu Guia" funciona em todas as páginas (botão dourado do menu).
+## Serviços externos
+- E-mail: Formspree, formulário `mojzpedy`.
+- Guias: Cloudflare Worker → Google Gemini (chave guardada como segredo na Cloudflare).
+- Domínio: registro.br, DNS apontando para o GitHub Pages.

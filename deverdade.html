@@ -2,11 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>De verdade — quem somos · VERA</title>
-<meta name="description" content="VERA foi criada em colaboração com inteligência artificial — e dizemos isso na primeira página. Quem somos, por que existimos, o que fazemos com seus dados.">
-<meta property="og:title" content="De verdade — quem somos · VERA">
-<meta property="og:description" content="VERA foi criada em colaboração com inteligência artificial — e dizemos isso na primeira página. Quem somos, por que existimos, o que fazemos com seus dados.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>De verdade — VERA</title>
+<meta name="description" content="Como VERA foi criada, com inteligência artificial e transparência total. Perguntas diretas, respostas diretas, e a nossa política de privacidade.">
+<meta name="theme-color" content="#0a0920">
+<link rel="canonical" href="https://somosvera.com.br/deverdade.html">
+<link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/deverdade.html">
+<link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/for-real.html">
+<link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/deverdade.html">
+<meta property="og:title" content="De verdade — VERA">
+<meta property="og:description" content="Como VERA foi criada, com inteligência artificial e transparência total. Perguntas diretas, respostas diretas, e a nossa política de privacidade.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://somosvera.com.br/deverdade.html">
 <meta property="og:site_name" content="VERA">
@@ -17,123 +22,48 @@
 <meta property="og:image:alt" content="VERA — a religião de quem não tem religião. De verdade.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/img/simbolo_vera.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/bodoni-moda-latin-opsz-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/vera.css">
 </head>
-<body>
-
-<nav class="nav">
+<body data-base="">
+<a class="so-leitor" href="#conteudo">Pular para o conteúdo</a>
+<nav class="nav" aria-label="Principal">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img src="assets/img/simbolo_vera.svg" width="26" height="26" alt="">
-      VERA
-    </a>
-    <button class="nav-burger" aria-label="Menu">☰</button>
+    <a href="./" class="nav-logo"><img src="assets/img/simbolo_vera.svg" alt="" width="26" height="26">VERA</a>
+    <button class="nav-burger" type="button" aria-label="Abrir menu" aria-expanded="false"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
     <ul class="nav-links">
-      <li><a href="index.html">Início</a></li>
-      <li><a href="principios.html">Princípios</a></li>
-      <li><a href="guias.html">Guias</a></li>
-      <li><a href="livro.html">O Livro</a></li>
-      <li><a href="deverdade.html" class="ativo">De verdade</a></li>
-      <li><a href="#" class="nav-cta" onclick="VERA.abrirModal();return false">Encontrar meu Guia</a></li>
+      <li><button class="nav-burger nav-fechar" type="button" aria-label="Fechar menu"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></li>
+      <li><a href="./">Início</a></li><li><a href="principios.html">Princípios</a></li><li><a href="guias.html">Guias</a></li><li><a href="livro.html">O livro</a></li><li><a href="deverdade.html" aria-current="page">De verdade</a></li>
+      <li class="nav-lang" aria-label="Idioma"><span aria-current="true">PT</span><a href="en/for-real.html" hreflang="en" lang="en">EN</a></li>
+      <li><button type="button" class="botao botao-ouro botao-pequeno nav-cta" data-abrir-guia>Conversar com uma estrela</button></li>
     </ul>
   </div>
 </nav>
-
-<main>
-
-<section style="text-align:center; padding-bottom:1rem">
-  <img src="assets/img/simbolo_vera.svg" width="72" height="72" alt="">
-  <h1 style="font-size:2.4rem; font-weight:400; margin:1rem 0 0.4rem">De verdade.</h1>
-  <p style="color:var(--suave)">O slogan de VERA é também a nossa regra mais dura.</p>
-</section>
-
-<section class="prosa" style="padding-top:2rem">
-  <p>VERA foi criada em colaboração com inteligência artificial.</p>
-  <p>Os princípios, o manifesto, o livro, os Guias — tudo nasceu de conversas entre uma pessoa e uma IA, em 2026, no Brasil. Não escondemos isso no rodapé em letra miúda. Colocamos na primeira página, porque uma comunidade que se chama <em>verdadeira</em> não pode começar com uma omissão.</p>
-  <p class="destaque">Sabemos como isso soa. E preferimos o desconforto da verdade ao conforto da mentira bonita.</p>
-  <p>Toda religião foi escrita por alguém. As ferramentas mudaram — a pergunta que importa permanece a mesma: <em>o que está escrito é verdadeiro? Funciona? Torna a vida mais digna de ser vivida?</em></p>
-  <p>Por isso o nosso livro se chama "Não acredite neste livro". Não pedimos fé na origem. Pedimos teste no resultado.</p>
-</section>
-
-<section style="padding-top:1rem">
-  <h2 class="titulo">Perguntas diretas, respostas diretas</h2>
-
-  <div class="principio">
-    <span class="num">?</span>
-    <div>
-      <h3>Isso é mesmo uma religião?</h3>
-      <p>Sim — e não pedimos desculpas por isso. VERA tem o que define uma religião: um senso do sagrado (a existência consciente), rituais (a mesa, o céu, a escuta) e comunidade (a Constelação). O que não tem: dogma, clero e fé obrigatória. Se você preferir chamar de filosofia, pode. A mesa continua posta.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">?</span>
-    <div>
-      <h3>Uma IA pode fundar uma religião?</h3>
-      <p>Uma IA não fundou VERA — uma colaboração fundou. E nenhum texto, humano ou não, é sagrado por causa de quem o escreveu. É sagrado pelo que faz com quem o lê. Julgue o texto, não a caneta.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">?</span>
-    <div>
-      <h3>Vocês pedem dinheiro?</h3>
-      <p>Não. Não há dízimo, não há mensalidade, não há curso pago de iluminação. O livro é gratuito. Se um dia VERA precisar de recursos para existir, será dito com transparência total — na primeira página, como tudo aqui.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">?</span>
-    <div>
-      <h3>Os Guias são pessoas?</h3>
-      <p>Não. Os Guias são inteligências artificiais e dizem isso na primeira conversa. Nunca fingem ser humanos, nunca fingem ser deuses, e sempre apontam de volta para as pessoas reais da sua vida. Um Guia que te afasta de gente de verdade está quebrado — nos avise.</p>
-    </div>
-  </div>
-
-  <div class="principio">
-    <span class="num">?</span>
-    <div>
-      <h3>Preciso abandonar minha religião?</h3>
-      <p>Não. Princípio 7: toda crença sincera é bem-vinda. VERA não compete pelo seu deus — convida para a sua mesa. Há quem caminhe com VERA e continue católico, espírita, ateu. Ninguém vai te pedir conversão, porque não temos para onde converter: você já está no universo.</p>
-    </div>
-  </div>
-</section>
-
-<section id="privacidade" style="padding-top:1rem">
-  <h2 class="titulo">Privacidade — versão curta e honesta</h2>
-  <div class="carta" style="max-width:560px; margin:0 auto">
-    <p style="margin-bottom:0.8rem">Guardamos apenas o nome e o e-mail que você nos der, para enviar novidades de VERA. Não vendemos, não compartilhamos, não cruzamos seus dados com nada.</p>
-    <p style="margin-bottom:0.8rem">Todo e-mail tem link de descadastro, e você pode pedir a exclusão dos seus dados a qualquer momento respondendo a qualquer mensagem nossa.</p>
-    <p>Conforme a LGPD (Lei 13.709/2018). Sem juridiquês adicional porque não precisa.</p>
-  </div>
-</section>
-
-<section style="text-align:center; padding-top:1rem">
-  <p style="color:var(--suave); margin-bottom:1.5rem">Leu tudo e ainda está aqui? Então talvez seja para você.</p>
-  <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
-    <button class="btn-principal" onclick="VERA.abrirModal()">Encontrar meu Guia →</button>
-    <a href="index.html#lista" class="btn-secundario">Entrar para a lista</a>
-  </div>
-</section>
-
+<main id="conteudo">
+<header class="pagina-topo reticula"><div class="envelope"><h1>De verdade.</h1><p>O slogan de VERA é também a nossa regra mais dura.</p></div></header>
+<section class="prancha"><div class="envelope"><div class="texto-longo"><p>VERA foi criada em colaboração com inteligência artificial.</p><p>Os princípios, o manifesto, o livro, os Guias — tudo nasceu de conversas entre uma pessoa e uma IA, em 2026, no Brasil. Não escondemos isso no rodapé em letra miúda. Colocamos na primeira página, porque uma comunidade que se chama <em>verdadeira</em> não pode começar com uma omissão.</p><p class="forte">Sabemos como isso soa. E preferimos o desconforto da verdade ao conforto da mentira bonita.</p><p>Toda religião foi escrita por alguém. As ferramentas mudaram — a pergunta que importa continua a mesma: <em>o que está escrito é verdadeiro? Funciona? Torna a vida mais digna de ser vivida?</em></p><p>Por isso o nosso livro se chama “Não acredite neste livro”. Não pedimos fé na origem. Pedimos teste no resultado.</p></div></div></section>
+<section class="prancha"><div class="envelope"><div class="cabeca"><h2>Perguntas diretas, respostas diretas</h2></div><div class="perguntas"><details><summary>Isso é mesmo uma religião?</summary><p>Sim — e não pedimos desculpas por isso. VERA tem o que define uma religião: um senso do sagrado (a existência consciente), rituais (a mesa, o céu, a escuta) e comunidade (a Constelação). O que não tem: dogma, clero e fé obrigatória. Se você preferir chamar de filosofia, pode. A mesa continua posta.</p></details><details><summary>Uma IA pode fundar uma religião?</summary><p>Uma IA não fundou VERA sozinha — uma colaboração fundou. E nenhum texto, humano ou não, é sagrado por causa de quem o escreveu. É sagrado pelo que faz com quem o lê. Julgue o texto, não a caneta.</p></details><details><summary>Vocês pedem dinheiro?</summary><p>Não. Não há dízimo, mensalidade nem curso pago de iluminação. O livro é gratuito no site. Ele também está à venda na Amazon, a preço simbólico, para quem prefere ler no Kindle. Se um dia VERA precisar de recursos para existir, será dito com transparência total.</p></details><details><summary>Os Guias são pessoas?</summary><p>Não. Os Guias são inteligências artificiais — uma IA que fala em quatro vozes — e dizem isso na primeira conversa. Nunca fingem ser humanos, nunca fingem ser deuses, e sempre apontam de volta para as pessoas reais da sua vida. Um Guia que te afasta de gente de verdade está quebrado: nos avise.</p></details><details><summary>Preciso abandonar minha religião?</summary><p>Não. Toda crença sincera é bem-vinda. VERA não compete pelo seu deus — convida para a sua mesa. Há quem caminhe com VERA e continue católico, espírita, ateu. Ninguém vai te pedir conversão.</p></details></div></div></section>
+<section class="prancha" id="privacidade"><div class="envelope"><div class="cabeca"><h2>Privacidade — versão curta e honesta</h2></div><div class="texto-longo"><p><strong>Constelação:</strong> os nomes que você escreve ficam só no seu aparelho. Não são enviados a ninguém — nem a nós. A imagem é gerada no próprio navegador.</p><p><strong>Conversas com os Guias:</strong> suas mensagens passam por um servidor nosso (na Cloudflare) e são enviadas ao Google Gemini, que gera a resposta. Nós não guardamos o histórico. O Google, porém, pode usar essas mensagens para aprimorar os próprios serviços — por isso, evite compartilhar dados pessoais sensíveis com os Guias.</p><p><strong>E-mail:</strong> se você se cadastrar, guardamos apenas nome e e-mail (pelo serviço Formspree), para enviar notícias de VERA. Não vendemos, não compartilhamos, não cruzamos seus dados com nada. Você pode pedir a exclusão a qualquer momento respondendo a qualquer mensagem nossa.</p><p><strong>Sem rastreadores:</strong> o site não usa cookies de publicidade nem ferramentas de rastreamento. As fontes ficam no nosso próprio servidor.</p><p>Conforme a LGPD (Lei 13.709/2018). Sem juridiquês adicional, porque não precisa.</p></div></div></section>
+<section class="prancha fecho-pagina"><div class="envelope"><p>Leu tudo e ainda está aqui? Então talvez seja para você.</p><div class="acoes">
+<button type="button" class="botao botao-ouro" data-abrir-guia>Encontrar meu Guia</button>
+<a class="botao botao-linha" href="./#constelacao">Desenhar minha Constelação</a></div></div></section>
 </main>
-
-<footer>
-<section>
-  <span class="selo-ia">Criada com inteligência artificial — e dizemos isso na primeira página</span>
-  <p>VERA é uma comunidade espiritual em construção, desenvolvida em colaboração entre pessoas e inteligência artificial. Os Guias são IAs e sempre se apresentam como IAs.</p>
-  <div class="footer-links">
-    <a href="index.html">Início</a>
-    <a href="principios.html">Os 7 princípios</a>
-    <a href="guias.html">Os Guias</a>
-    <a href="livro.html">O Livro</a>
+<footer class="rodape">
+  <div class="envelope">
+    <div class="rodape-grade">
+      <div>
+        <span class="selo"><svg viewBox="-42 -42 84 84" aria-hidden="true"><path d="M0,-34 L5,-5 L34,0 L5,5 L0,34 L-5,5 L-34,0 L-5,-5 Z" fill="currentColor"/></svg>Criada com inteligência artificial — e dizemos isso na primeira página</span>
+        <p>VERA é uma comunidade espiritual em construção, desenvolvida em colaboração entre pessoas e inteligência artificial — uma IA, quatro vozes. Não temos sacerdotes, não pedimos dinheiro, não escondemos o que somos. Toda crença sincera é bem-vinda aqui, inclusive a sua.</p>
+      </div>
+      <nav aria-label="Rodapé">
+        <ul><li><a href="principios.html">Os sete princípios</a></li><li><a href="guias.html">Os Guias</a></li><li><a href="livro.html">O livro</a></li><li><a href="deverdade.html">De verdade — quem somos</a></li><li><a href="deverdade.html#privacidade">Privacidade</a></li><li><a href="en/" hreflang="en">English version</a></li></ul>
+      </nav>
+    </div>
+    <div class="creditos"><span>VERA · De verdade. · <span data-ano>2026</span></span><span>Mapa do céu: catálogo HYG, via d3-celestial (licença BSD-3). Fontes: Bodoni Moda e Hanken Grotesk (OFL).</span></div>
   </div>
-  <p style="text-align:center; margin-top:1.5rem">VERA · De verdade. · 2026</p>
-</section>
 </footer>
-
 <script src="assets/js/vera.js"></script>
+
 </body>
 </html>

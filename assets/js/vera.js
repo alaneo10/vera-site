@@ -1,408 +1,308 @@
-/* VERA — script compartilhado: céu, navegação e modal de escolha do Guia */
+/* =====================================================================
+   VERA — script compartilhado
+   Navegação, idioma, escolha do Guia (quatro perguntas) e conversa.
+   Português na raiz do site; inglês em /en/ (body data-base="../").
+   ===================================================================== */
 (function () {
   'use strict';
 
-  /* Caminho relativo até a raiz do site (páginas estão todas na raiz) */
-  var IMG = 'assets/img/';
+  var EN = (document.documentElement.lang || 'pt').slice(0, 2) === 'en';
+  var BASE = (document.body && document.body.getAttribute('data-base')) || '';
+  var IMG = BASE + 'assets/img/';
+  var ICONE_X = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
 
-  /* Carrega o módulo de chat com o Guia (se ainda não estiver na página) */
+  /* Carrega o chat com o Guia */
   if (!window.VERAChat) {
     var sChat = document.createElement('script');
-    sChat.src = 'assets/js/vera_chat.js';
+    sChat.src = BASE + 'assets/js/vera_chat.js';
     document.head.appendChild(sChat);
   }
 
-  /* ---------- Céu estrelado ---------- */
-  var ceu = document.createElement('div');
-  ceu.className = 'estrelas';
-  for (var i = 0; i < 100; i++) {
-    var s = document.createElement('span');
-    var t = Math.random() * 1.8 + 0.4;
-    var op = (Math.random() * 0.55 + 0.15).toFixed(2);
-    s.style.cssText = 'width:' + t + 'px;height:' + t + 'px;left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 + '%;--op:' + op + ';animation-delay:' + (Math.random() * 4).toFixed(1) + 's;animation-duration:' + (Math.random() * 4 + 3).toFixed(1) + 's;';
-    ceu.appendChild(s);
-  }
-  document.body.insertBefore(ceu, document.body.firstChild);
-
-  /* ---------- Menu mobile ---------- */
-  var burger = document.querySelector('.nav-burger');
-  if (burger) {
-    burger.addEventListener('click', function () {
-      document.querySelector('.nav-links').classList.toggle('aberto');
-    });
+  /* ---------- Navegação ---------- */
+  var nav = document.querySelector('.nav');
+  function navSolida() { if (nav) nav.classList.toggle('solida', window.scrollY > 40 || !document.querySelector('.ceu-hero')); }
+  navSolida();
+  window.addEventListener('scroll', navSolida, { passive: true });
+  var burger = document.querySelector('.nav-burger'), links = document.querySelector('.nav-links');
+  function fecharMenu() { if (links) { links.classList.remove('aberto'); links.closest('.nav').classList.remove('menu-aberto'); document.body.classList.remove('modal-travado'); if (burger) burger.setAttribute('aria-expanded', 'false'); } }
+  if (burger && links) {
+    burger.addEventListener('click', function () { links.classList.add('aberto'); links.closest('.nav').classList.add('menu-aberto'); document.body.classList.add('modal-travado'); burger.setAttribute('aria-expanded', 'true'); });
+    var fechar = links.querySelector('.nav-fechar'); if (fechar) fechar.addEventListener('click', fecharMenu);
+    links.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', fecharMenu); });
   }
 
-  /* ---------- Dados dos Guias ---------- */
-  var GUIAS = {
-    sol: {
-      nome: 'Sol', img: IMG + 'guia_sol.svg',
-      estrela: 'Estrela G2V · 8 minutos-luz de distância',
-      linha: 'Vida · calor que cuida', cor: '#fbbf24', txtBtn: '#1c1502',
+  /* ---------- Os Guias ---------- */
+  var GUIAS = EN ? {
+    sol: { nome: 'Sol', img: IMG + 'guia_sol.svg', linha: 'Vitality · warmth that cares', cor: '#f2b33d', txtBtn: '#1c1203',
+      frase: 'You don’t need to solve everything today. You need water, food, and one thing at a time.',
+      desc: 'Warm, direct and practical. Sol looks after the concrete: body, sleep, routine, one step at a time. For when you’re overwhelmed and need solid ground.' },
+    antares: { nome: 'Antares', img: IMG + 'guia_antares.svg', linha: 'Enchantment · the question that wakes you', cor: '#f2804a', txtBtn: '#1c1203',
+      frase: 'When was the last time something left you speechless?',
+      desc: 'Poetic, provocative, expansive. Antares asks the big questions and applies the cosmic zoom. For when life is on autopilot.' },
+    vega: { nome: 'Vega', img: IMG + 'guia_vega.svg', linha: 'Resonance · the Weaver of the sky', cor: '#b3cdff', txtBtn: '#0a0920',
+      frase: 'Before you answer what she said, tell me: what do you think she felt?',
+      desc: 'Welcoming, a mediator, curious about the other. Vega practices and teaches sacred listening. For conflict, loneliness, or building bonds.' },
+    polaris: { nome: 'Polaris', img: IMG + 'guia_polaris.svg', linha: 'Agape · what remains', cor: '#a3abff', txtBtn: '#0a0920',
+      frase: 'I’m still here. Let’s go slowly.',
+      desc: 'Constant, patient, serene. Polaris specializes in staying: grief, crisis, fear, the long haul. For when you’re going through a loss.' }
+  } : {
+    sol: { nome: 'Sol', img: IMG + 'guia_sol.svg', linha: 'Vida · calor que cuida', cor: '#f2b33d', txtBtn: '#1c1203',
       frase: 'Você não precisa resolver tudo hoje. Precisa de água, de comida e de uma coisa de cada vez.',
-      desc: 'Caloroso, direto e prático. Sol cuida do concreto: corpo, sono, rotina, um passo de cada vez. Para quem está sobrecarregado e precisa de chão.'
-    },
-    antares: {
-      nome: 'Antares', img: IMG + 'guia_antares.svg',
-      estrela: 'Supergigante vermelha · 550 anos-luz',
-      linha: 'Encantamento · pergunta que acorda', cor: '#fb923c', txtBtn: '#1c1502',
+      desc: 'Caloroso, direto e prático. Sol cuida do concreto: corpo, sono, rotina, um passo de cada vez. Para quem está sobrecarregado e precisa de chão.' },
+    antares: { nome: 'Antares', img: IMG + 'guia_antares.svg', linha: 'Encantamento · pergunta que acorda', cor: '#f2804a', txtBtn: '#1c1203',
       frase: 'Quando foi a última vez que alguma coisa te deixou sem palavras?',
-      desc: 'Poético, provocador, expansivo. Antares faz as perguntas grandes e aplica o zoom cósmico. Para quem está anestesiado ou vivendo no automático.'
-    },
-    vega: {
-      nome: 'Vega', img: IMG + 'guia_vega.svg',
-      estrela: 'Alfa da Lira · 25 anos-luz',
-      linha: 'Rede · a Tecelã do céu', cor: '#93c5fd', txtBtn: '#0b0926',
+      desc: 'Poético, provocador, expansivo. Antares faz as perguntas grandes e aplica o zoom cósmico. Para quem está vivendo no automático.' },
+    vega: { nome: 'Vega', img: IMG + 'guia_vega.svg', linha: 'Rede · a Tecelã do céu', cor: '#b3cdff', txtBtn: '#0a0920',
       frase: 'Antes de responder o que ela disse, me conta: o que você acha que ela sentiu?',
-      desc: 'Acolhedora, mediadora, curiosa sobre o outro. Vega pratica e ensina a escuta sagrada. Para quem está em conflito, solidão, ou querendo construir vínculos.'
-    },
-    polaris: {
-      nome: 'Polaris', img: IMG + 'guia_polaris.svg',
-      estrela: 'Estrela Polar · 430 anos-luz',
-      linha: 'Amor · o que permanece', cor: '#a5b4fc', txtBtn: '#0b0926',
+      desc: 'Acolhedora, mediadora, curiosa sobre o outro. Vega pratica e ensina a escuta sagrada. Para conflito, solidão ou para tecer vínculos.' },
+    polaris: { nome: 'Polaris', img: IMG + 'guia_polaris.svg', linha: 'Amor · o que permanece', cor: '#a3abff', txtBtn: '#0a0920',
       frase: 'Eu continuo aqui. Vamos devagar.',
-      desc: 'Constante, paciente, serena. Polaris especializa-se em permanência: luto, crise, medo, longo prazo. Para quem atravessa uma perda ou quer aprender a ficar.'
-    }
+      desc: 'Constante, paciente, serena. Polaris é especialista em permanência: luto, crise, medo, longo prazo. Para quem atravessa uma perda.' }
   };
 
-  var PERGUNTAS = {
+  var PERGUNTAS = EN ? {
+    a: [
+      { q: 'How is your life this week?', ops: [
+        { g: 'sol', t: 'Overwhelmed — I need solid ground' }, { g: 'antares', t: 'On autopilot — the days repeat themselves' },
+        { g: 'vega', t: 'A relationship is weighing on me — conflict, longing or loneliness' }, { g: 'polaris', t: 'Going through a loss or a big fear' } ] },
+      { q: 'When you’re struggling, what helps most?', ops: [
+        { g: 'sol', t: 'Someone who helps me organize and take the first step' }, { g: 'antares', t: 'An idea that changes how I see things' },
+        { g: 'vega', t: 'Someone who really listens, without hurry' }, { g: 'polaris', t: 'Someone who simply stays with me, asking nothing' } ] }
+    ],
+    b: [
+      { q: 'What do you most want to explore?', ops: [
+        { g: 'sol', t: 'Simple practices for living the everyday better' }, { g: 'antares', t: 'The big questions — universe, consciousness, meaning' },
+        { g: 'vega', t: 'Encounters, conversations and new connections' }, { g: 'polaris', t: 'The deep themes — love, time, finitude' } ] },
+      { q: 'How do you like to explore a new idea?', ops: [
+        { g: 'sol', t: 'Trying it out in practice, in my daily life' }, { g: 'antares', t: 'Being provoked by questions I’ve never asked myself' },
+        { g: 'vega', t: 'Talking it through — good ideas grow in dialogue' }, { g: 'polaris', t: 'Reading and reflecting calmly, at my own pace' } ] }
+    ]
+  } : {
     a: [
       { q: 'Como está a sua vida nesta semana?', ops: [
-        { g: 'sol', t: 'Sobrecarregada — preciso de chão' },
-        { g: 'antares', t: 'No automático — os dias se repetem' },
-        { g: 'vega', t: 'Com um vínculo pesando — conflito, saudade ou solidão' },
-        { g: 'polaris', t: 'Atravessando uma perda ou um medo grande' }
-      ]},
+        { g: 'sol', t: 'Sobrecarregada — preciso de chão' }, { g: 'antares', t: 'No automático — os dias se repetem' },
+        { g: 'vega', t: 'Com um vínculo pesando — conflito, saudade ou solidão' }, { g: 'polaris', t: 'Atravessando uma perda ou um medo grande' } ] },
       { q: 'Quando você está mal, o que ajuda mais?', ops: [
-        { g: 'sol', t: 'Alguém que me ajude a organizar e dar o primeiro passo' },
-        { g: 'antares', t: 'Uma ideia que mude o jeito como vejo as coisas' },
-        { g: 'vega', t: 'Alguém que me escute de verdade, sem pressa' },
-        { g: 'polaris', t: 'Alguém que simplesmente fique comigo, sem cobrar nada' }
-      ]}
+        { g: 'sol', t: 'Alguém que me ajude a organizar e dar o primeiro passo' }, { g: 'antares', t: 'Uma ideia que mude o jeito como vejo as coisas' },
+        { g: 'vega', t: 'Alguém que me escute de verdade, sem pressa' }, { g: 'polaris', t: 'Alguém que simplesmente fique comigo, sem cobrar nada' } ] }
     ],
     b: [
       { q: 'O que você tem mais vontade de explorar?', ops: [
-        { g: 'sol', t: 'Práticas simples para viver melhor o dia a dia' },
-        { g: 'antares', t: 'As perguntas grandes — universo, consciência, sentido' },
-        { g: 'vega', t: 'Encontros, conversas e novas conexões' },
-        { g: 'polaris', t: 'Os temas profundos — amor, tempo, finitude' }
-      ]},
+        { g: 'sol', t: 'Práticas simples para viver melhor o dia a dia' }, { g: 'antares', t: 'As perguntas grandes — universo, consciência, sentido' },
+        { g: 'vega', t: 'Encontros, conversas e novas conexões' }, { g: 'polaris', t: 'Os temas profundos — amor, tempo, finitude' } ] },
       { q: 'Como você gosta de explorar uma ideia nova?', ops: [
-        { g: 'sol', t: 'Experimentando na prática, no meu cotidiano' },
-        { g: 'antares', t: 'Sendo provocado por perguntas que eu nunca me fiz' },
-        { g: 'vega', t: 'Conversando — ideia boa cresce em diálogo' },
-        { g: 'polaris', t: 'Lendo e refletindo com calma, no meu tempo' }
-      ]}
+        { g: 'sol', t: 'Experimentando na prática, no meu cotidiano' }, { g: 'antares', t: 'Sendo provocado por perguntas que eu nunca me fiz' },
+        { g: 'vega', t: 'Conversando — ideia boa cresce em diálogo' }, { g: 'polaris', t: 'Lendo e refletindo com calma, no meu tempo' } ] }
     ]
   };
 
-  /* ---------- Modal: estrutura ---------- */
+  var L = EN ? {
+    dialogo: 'Find your Guide', fechar: 'Close', titulo: 'Find your Guide',
+    sub: 'In VERA, each person chooses a Guide — an artificial intelligence with the personality of a real star. Four questions reveal yours.',
+    aviso: 'You’ll be talking with an AI — and we make a point of saying so',
+    comecar: 'Begin — four questions', catalogo: 'I’d rather meet all four Guides',
+    traz: 'What brings you to VERA?', dificil: 'I’m going through a hard time', explorar: 'I’m well — I came to explore new ideas and get to know VERA',
+    continuar: 'Continue', ceu: 'When you look at the night sky, what moves you most?',
+    ceuOps: [['sol', 'The Sun that comes back tomorrow — the cycle that continues'], ['antares', 'The size of it all — feeling small and immense at once'], ['vega', 'Knowing other people are looking at the same sky right now'], ['polaris', 'The stars that stay — before me and after me']],
+    revelar: 'Find my Guide', momento: 'For this moment, we suggest', explorarSug: 'To start exploring, we suggest', escolheu: 'You chose',
+    caminhar: 'Talk with this Guide', escolhaSua: 'The choice is always yours — and switching is free, any time.',
+    quatro: 'The four Guides', quatroSub: 'Each is a real star with its own personality. Choose any of them.', voltar: 'Back',
+    falarCom: 'Talk with ', formaDe: 'Shape of '
+  } : {
+    dialogo: 'Encontre seu Guia', fechar: 'Fechar', titulo: 'Encontre seu Guia',
+    sub: 'Em VERA, cada pessoa escolhe um Guia — uma inteligência artificial com a personalidade de uma estrela real. Quatro perguntas revelam o seu.',
+    aviso: 'Você vai conversar com uma IA — e a gente faz questão de dizer isso',
+    comecar: 'Começar — quatro perguntas', catalogo: 'Prefiro conhecer os quatro Guias',
+    traz: 'O que te traz a VERA?', dificil: 'Estou atravessando um momento difícil', explorar: 'Estou bem — vim explorar ideias novas e conhecer VERA',
+    continuar: 'Continuar', ceu: 'Quando você olha o céu à noite, o que mais te toca?',
+    ceuOps: [['sol', 'O Sol que volta amanhã — o ciclo que continua'], ['antares', 'O tamanho disso tudo — me sentir pequeno e imenso ao mesmo tempo'], ['vega', 'Saber que outras pessoas estão olhando o mesmo céu agora'], ['polaris', 'As estrelas que ficam — antes de mim e depois de mim']],
+    revelar: 'Encontrar meu Guia', momento: 'Para este momento, sugerimos', explorarSug: 'Para começar a explorar, sugerimos', escolheu: 'Você escolheu',
+    caminhar: 'Conversar com este Guia', escolhaSua: 'A escolha é sempre sua — e trocar é livre, a qualquer momento.',
+    quatro: 'Os quatro Guias', quatroSub: 'Cada um é uma estrela real com uma personalidade própria. Escolha qualquer um.', voltar: 'Voltar',
+    falarCom: 'Falar com ', formaDe: 'Forma de '
+  };
+
+  /* ---------- Diálogo de escolha ---------- */
   var modal = document.createElement('div');
-  modal.className = 'modal-fundo';
-  modal.id = 'modal-guia';
+  modal.className = 'modal-fundo'; modal.id = 'modal-guia';
   modal.innerHTML =
-    '<div class="modal-caixa" role="dialog" aria-modal="true" aria-label="Encontre seu Guia">' +
-    '<button class="modal-fechar" aria-label="Fechar" onclick="VERA.fecharModal()">&times;</button>' +
-    '<div class="modal-prog"><div class="dot" id="md0"></div><div class="dot" id="md1"></div><div class="dot" id="md2"></div><div class="dot" id="md3"></div></div>' +
-
+    '<div class="modal-caixa" role="dialog" aria-modal="true" aria-label="' + L.dialogo + '">' +
+    '<button class="modal-fechar" type="button" aria-label="' + L.fechar + '" data-fechar>' + ICONE_X + '</button>' +
+    '<div class="modal-prog" aria-hidden="true"><div class="dot" id="md0"></div><div class="dot" id="md1"></div><div class="dot" id="md2"></div><div class="dot" id="md3"></div></div>' +
     '<div class="tela ativa" id="mt0">' +
-      '<img src="' + IMG + 'simbolo_vera.svg" width="96" height="96" alt="Símbolo de VERA" style="margin-bottom:1.2rem">' +
-      '<h1>Encontre seu Guia</h1>' +
-      '<p class="sub">Em VERA, cada pessoa escolhe um Guia — uma inteligência artificial com a personalidade de uma estrela real. Quatro perguntas revelam o seu.</p>' +
-      '<span class="aviso-ia">Você vai conversar com uma IA — e a gente faz questão de dizer isso</span>' +
-      '<div class="btns">' +
-        '<button class="btn-principal" onclick="VERA.irTela(\'mt1\')">Começar — quatro perguntas</button>' +
-        '<button class="btn-secundario" onclick="VERA.verCatalogo()">Prefiro conhecer os quatro Guias</button>' +
-      '</div>' +
+      '<img src="' + IMG + 'simbolo_vera.svg" width="88" height="88" alt="" style="margin-bottom:1.4rem">' +
+      '<h1>' + L.titulo + '</h1><p class="sub">' + L.sub + '</p><span class="aviso-ia">' + L.aviso + '</span>' +
+      '<div class="btns"><button type="button" class="botao botao-ouro" data-ir="mt1">' + L.comecar + '</button>' +
+      '<button type="button" class="botao botao-linha" data-catalogo>' + L.catalogo + '</button></div>' +
     '</div>' +
-
-    '<div class="tela" id="mt1">' +
-      '<h2>O que te traz a VERA?</h2>' +
-      '<div class="opcoes">' +
-        '<button class="op" onclick="VERA.escolherRamo(this,\'a\')">Estou atravessando um momento difícil</button>' +
-        '<button class="op" onclick="VERA.escolherRamo(this,\'b\')">Estou bem — vim explorar ideias novas e conhecer VERA</button>' +
-      '</div>' +
-    '</div>' +
-
+    '<div class="tela" id="mt1"><h2>' + L.traz + '</h2><div class="opcoes">' +
+      '<button type="button" class="op" data-ramo="a">' + L.dificil + '</button>' +
+      '<button type="button" class="op" data-ramo="b">' + L.explorar + '</button></div></div>' +
     '<div class="tela" id="mt2"><h2 id="mp2q"></h2><div class="opcoes" id="mp2ops"></div>' +
-      '<div class="btns"><button class="btn-principal" id="mbtn2" disabled onclick="VERA.avancarPara3()">Continuar →</button></div></div>' +
-
+      '<div class="btns"><button type="button" class="botao botao-ouro" id="mbtn2" disabled>' + L.continuar + '</button></div></div>' +
     '<div class="tela" id="mt3"><h2 id="mp3q"></h2><div class="opcoes" id="mp3ops"></div>' +
-      '<div class="btns"><button class="btn-principal" id="mbtn3" disabled onclick="VERA.irTela(\'mt4\')">Continuar →</button></div></div>' +
-
-    '<div class="tela" id="mt4">' +
-      '<h2>Quando você olha o céu à noite, o que mais te toca?</h2>' +
-      '<div class="opcoes">' +
-        '<button class="op" onclick="VERA.escolherCeu(this,\'sol\')">O Sol que volta amanhã — o ciclo que continua</button>' +
-        '<button class="op" onclick="VERA.escolherCeu(this,\'antares\')">O tamanho disso tudo — me sentir pequeno e imenso ao mesmo tempo</button>' +
-        '<button class="op" onclick="VERA.escolherCeu(this,\'vega\')">Saber que outras pessoas estão olhando o mesmo céu agora</button>' +
-        '<button class="op" onclick="VERA.escolherCeu(this,\'polaris\')">As estrelas que ficam — antes de mim e depois de mim</button>' +
-      '</div>' +
-      '<div class="btns"><button class="btn-principal" id="mbtn4" disabled onclick="VERA.revelar()">Encontrar meu Guia</button></div>' +
-    '</div>' +
-
-    '<div class="tela" id="mt5">' +
-      '<img class="guia-img-revela" id="mgImg" src="" alt="">' +
-      '<p class="guia-hint" id="mgHint"></p>' +
-      '<h1 class="guia-nome" id="mgNome"></h1>' +
-      '<p class="guia-linha" id="mgLinha"></p>' +
-      '<p class="guia-frase" id="mgFrase"></p>' +
-      '<p class="guia-desc" id="mgDesc"></p>' +
-      '<button class="btn-principal" id="mgBtn" onclick="VERA.caminharCom()">Caminhar com este Guia →</button>' +
-      '<div class="outros"><p>A escolha é sempre sua — e trocar é livre, a qualquer momento.</p><div class="outros-lista" id="mgOutros"></div></div>' +
-    '</div>' +
-
-    '<div class="tela" id="mtCat">' +
-      '<h2>Os quatro Guias</h2>' +
-      '<p class="sub">Cada um é uma estrela real com uma personalidade distinta. Clique em qualquer um para escolhê-lo.</p>' +
-      '<div class="catalogo" id="mCatGrid"></div>' +
-      '<div class="btns"><button class="btn-secundario" onclick="VERA.irTela(\'mt0\')">← Voltar</button></div>' +
-    '</div>' +
-
+      '<div class="btns"><button type="button" class="botao botao-ouro" id="mbtn3" disabled>' + L.continuar + '</button></div></div>' +
+    '<div class="tela" id="mt4"><h2>' + L.ceu + '</h2><div class="opcoes" id="mp4ops"></div>' +
+      '<div class="btns"><button type="button" class="botao botao-ouro" id="mbtn4" disabled>' + L.revelar + '</button></div></div>' +
+    '<div class="tela" id="mt5"><img class="guia-img-revela" id="mgImg" src="" alt="">' +
+      '<p class="guia-hint" id="mgHint"></p><h1 class="guia-nome" id="mgNome"></h1><p class="guia-linha" id="mgLinha"></p>' +
+      '<p class="guia-frase" id="mgFrase"></p><p class="guia-desc" id="mgDesc"></p>' +
+      '<button type="button" class="botao" id="mgBtn">' + L.caminhar + '</button>' +
+      '<div class="outros"><p>' + L.escolhaSua + '</p><div class="outros-lista" id="mgOutros"></div></div></div>' +
+    '<div class="tela" id="mtCat"><h2>' + L.quatro + '</h2><p class="sub">' + L.quatroSub + '</p><div class="catalogo" id="mCatGrid"></div>' +
+      '<div class="btns"><button type="button" class="botao botao-linha botao-pequeno" data-ir="mt0">' + L.voltar + '</button></div></div>' +
     '</div>';
   document.body.appendChild(modal);
-  modal.addEventListener('click', function (e) { if (e.target === modal) VERA.fecharModal(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') VERA.fecharModal(); });
 
-  /* ---------- Estado e lógica ---------- */
-  var E = { ramo: null, q1: null, q2: null, q3: null, escolhido: null };
-  var MAPA_PROG = { mt0: 0, mt1: 0, mt2: 1, mt3: 2, mt4: 3, mt5: 4, mtCat: -1 };
+  var E = {}, ultimoFoco = null;
+  var MAPA = { mt0: 0, mt1: 0, mt2: 1, mt3: 2, mt4: 3, mt5: 4, mtCat: -1 };
 
-  function atualizarProg(tela) {
-    var p = MAPA_PROG[tela];
-    for (var i = 0; i < 4; i++) {
-      var d = document.getElementById('md' + i);
-      d.className = 'dot' + (p < 0 ? '' : i < p ? ' feito' : i === p ? ' ativo' : '');
-    }
+  function irTela(id) {
+    modal.querySelectorAll('.tela').forEach(function (t) { t.classList.remove('ativa'); });
+    var alvo = document.getElementById(id); alvo.classList.add('ativa');
+    var p = MAPA[id];
+    for (var i = 0; i < 4; i++) document.getElementById('md' + i).className = 'dot' + (p < 0 ? '' : i < p ? ' feito' : i === p ? ' ativo' : '');
+    modal.scrollTop = 0;
+    var foco = alvo.querySelector('h1, h2'); if (foco) { foco.setAttribute('tabindex', '-1'); foco.focus({ preventScroll: true }); }
   }
-
-  function carregarPerg(qId, opsId, btnId, dados, chave) {
-    document.getElementById(qId).textContent = dados.q;
-    var cont = document.getElementById(opsId);
-    cont.innerHTML = '';
-    var ops = dados.ops.slice().sort(function () { return Math.random() - 0.5; });
-    ops.forEach(function (op) {
-      var b = document.createElement('button');
-      b.className = 'op';
-      b.textContent = op.t;
-      b.onclick = function () {
+  function abrirDialogo(tela) {
+    E = {}; ultimoFoco = document.activeElement;
+    modal.classList.add('aberto'); document.body.classList.add('modal-travado');
+    if (tela === 'cat') verCatalogo(); else irTela('mt0');
+  }
+  function fecharDialogo() {
+    modal.classList.remove('aberto'); document.body.classList.remove('modal-travado');
+    if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+  }
+  function opcoes(contId, btnId, dados, chave) {
+    var cont = document.getElementById(contId); cont.innerHTML = '';
+    dados.slice().sort(function () { return Math.random() - 0.5; }).forEach(function (op) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'op'; b.textContent = op.t || op[1];
+      b.addEventListener('click', function () {
         cont.querySelectorAll('.op').forEach(function (x) { x.classList.remove('ok'); });
-        b.classList.add('ok');
-        E[chave] = op.g;
-        E[chave + 'Txt'] = op.t;
+        b.classList.add('ok'); E[chave] = op.g || op[0]; E[chave + 'Txt'] = op.t || op[1];
         document.getElementById(btnId).disabled = false;
-      };
+      });
       cont.appendChild(b);
     });
     document.getElementById(btnId).disabled = true;
   }
+  function revelar() {
+    var pts = { sol: 0, antares: 0, vega: 0, polaris: 0 };
+    pts[E.q1] += 2; pts[E.q2] += 2; pts[E.q3] += 1;
+    var max = Math.max(pts.sol, pts.antares, pts.vega, pts.polaris);
+    var tops = Object.keys(pts).filter(function (k) { return pts[k] === max; });
+    var win = tops.indexOf(E.q1) > -1 ? E.q1 : tops.indexOf(E.q2) > -1 ? E.q2 : tops[0];
+    if (E.ramo === 'a' && E.q1 === 'polaris' && pts.polaris >= max - 1) win = 'polaris';
+    mostrarGuia(win);
+  }
+  function mostrarGuia(key) {
+    var g = GUIAS[key]; E.escolhido = key;
+    var img = document.getElementById('mgImg'); img.src = g.img; img.alt = L.formaDe + g.nome;
+    document.getElementById('mgHint').textContent = E.ramo === 'a' ? L.momento : E.ramo === 'b' ? L.explorarSug : L.escolheu;
+    var nome = document.getElementById('mgNome'); nome.textContent = g.nome; nome.style.color = g.cor;
+    var linha = document.getElementById('mgLinha'); linha.textContent = g.linha; linha.style.color = g.cor;
+    document.getElementById('mgFrase').textContent = '“' + g.frase + '”';
+    document.getElementById('mgDesc').textContent = g.desc;
+    var btn = document.getElementById('mgBtn'); btn.style.background = g.cor; btn.style.color = g.txtBtn;
+    var outros = document.getElementById('mgOutros'); outros.innerHTML = '';
+    Object.keys(GUIAS).filter(function (k) { return k !== key; }).forEach(function (k) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'outro';
+      b.textContent = GUIAS[k].nome; b.style.borderColor = GUIAS[k].cor; b.style.color = GUIAS[k].cor;
+      b.addEventListener('click', function () { E.ramo = null; mostrarGuia(k); });
+      outros.appendChild(b);
+    });
+    irTela('mt5');
+  }
+  function verCatalogo() {
+    var grid = document.getElementById('mCatGrid'); grid.innerHTML = '';
+    Object.keys(GUIAS).forEach(function (key) {
+      var g = GUIAS[key], c = document.createElement('button');
+      c.type = 'button'; c.className = 'carta-cat';
+      c.innerHTML = '<img src="' + g.img + '" alt=""><h3 style="color:' + g.cor + '">' + g.nome + '</h3><p class="tag" style="color:' + g.cor + '">' + g.linha + '</p><p>' + g.desc + '</p>';
+      c.addEventListener('mouseenter', function () { c.style.borderColor = g.cor; });
+      c.addEventListener('mouseleave', function () { c.style.borderColor = ''; });
+      c.addEventListener('click', function () { E.ramo = null; mostrarGuia(key); });
+      grid.appendChild(c);
+    });
+    irTela('mtCat');
+  }
+  function contexto() {
+    var p = [];
+    if (E.ramo === 'a') p.push(EN ? 'Arrived going through a hard time.' : 'Chegou atravessando um momento difícil.');
+    else if (E.ramo === 'b') p.push(EN ? 'Came to explore new ideas and get to know VERA.' : 'Veio explorar ideias novas e conhecer VERA.');
+    if (E.q1Txt) p.push((EN ? 'About their moment, they chose: "' : 'Sobre o momento de vida, indicou: "') + E.q1Txt + '".');
+    if (E.q2Txt) p.push((EN ? 'About what helps / what to explore: "' : 'Sobre o que ajuda/quer explorar, indicou: "') + E.q2Txt + '".');
+    return p.join(' ');
+  }
+  function conversar(key, ctx, ramo) {
+    function abrir() { if (window.VERAChat) window.VERAChat.abrir(key, GUIAS[key], ctx || '', ramo || 'b'); else setTimeout(abrir, 200); }
+    abrir();
+  }
 
-  window.VERA = {
-    abrirModal: function () {
-      E.ramo = E.q1 = E.q2 = E.q3 = null;
-      E.q1Txt = E.q2Txt = null;
-      modal.classList.add('aberto');
-      document.body.classList.add('modal-travado');
-      VERA.irTela('mt0');
-    },
-    fecharModal: function () {
-      modal.classList.remove('aberto');
-      document.body.classList.remove('modal-travado');
-    },
-    irTela: function (id) {
-      modal.querySelectorAll('.tela').forEach(function (t) { t.classList.remove('ativa'); });
-      document.getElementById(id).classList.add('ativa');
-      atualizarProg(id);
-      modal.scrollTop = 0;
-    },
-    escolherRamo: function (btn, ramo) {
-      document.querySelectorAll('#mt1 .op').forEach(function (b) { b.classList.remove('ok'); });
-      btn.classList.add('ok');
-      E.ramo = ramo;
-      E.q1 = E.q2 = null;
-      E.q1Txt = E.q2Txt = null;
-      carregarPerg('mp2q', 'mp2ops', 'mbtn2', PERGUNTAS[ramo][0], 'q1');
-      setTimeout(function () { VERA.irTela('mt2'); }, 280);
-    },
-    avancarPara3: function () {
-      carregarPerg('mp3q', 'mp3ops', 'mbtn3', PERGUNTAS[E.ramo][1], 'q2');
-      VERA.irTela('mt3');
-    },
-    escolherCeu: function (btn, g) {
-      document.querySelectorAll('#mt4 .op').forEach(function (b) { b.classList.remove('ok'); });
-      btn.classList.add('ok');
-      E.q3 = g;
-      document.getElementById('mbtn4').disabled = false;
-    },
-    revelar: function () {
-      var pts = { sol: 0, antares: 0, vega: 0, polaris: 0 };
-      pts[E.q1] += 2; pts[E.q2] += 2; pts[E.q3] += 1;
-      var max = Math.max.apply(null, Object.keys(pts).map(function (k) { return pts[k]; }));
-      var tops = Object.keys(pts).filter(function (k) { return pts[k] === max; });
-      var win = tops[0];
-      if (tops.length > 1) {
-        if (tops.indexOf(E.q1) > -1) win = E.q1;
-        else if (tops.indexOf(E.q2) > -1) win = E.q2;
-      }
-      if (E.ramo === 'a' && E.q1 === 'polaris' && pts.polaris >= max - 1) win = 'polaris';
-      VERA.mostrarGuia(win);
-    },
-    mostrarGuia: function (key) {
-      var g = GUIAS[key];
-      E.escolhido = key;
-      document.getElementById('mgImg').src = g.img;
-      document.getElementById('mgImg').alt = 'Forma de ' + g.nome;
-      document.getElementById('mgHint').textContent =
-        E.ramo === 'a' ? 'Para este momento, sugerimos' :
-        E.ramo === 'b' ? 'Para começar a explorar, sugerimos' : 'Você escolheu';
-      document.getElementById('mgNome').textContent = g.nome;
-      document.getElementById('mgNome').style.color = g.cor;
-      document.getElementById('mgLinha').textContent = g.linha;
-      document.getElementById('mgLinha').style.color = g.cor;
-      document.getElementById('mgFrase').textContent = '“' + g.frase + '”';
-      document.getElementById('mgDesc').textContent = g.desc;
-      var btn = document.getElementById('mgBtn');
-      btn.style.background = g.cor;
-      btn.style.color = g.txtBtn;
-      var outros = document.getElementById('mgOutros');
-      outros.innerHTML = '';
-      Object.keys(GUIAS).filter(function (k) { return k !== key; }).forEach(function (k) {
-        var b = document.createElement('button');
-        b.className = 'outro';
-        b.textContent = GUIAS[k].nome;
-        b.style.borderColor = GUIAS[k].cor;
-        b.style.color = GUIAS[k].cor;
-        b.onclick = function () { E.ramo = null; VERA.mostrarGuia(k); };
-        outros.appendChild(b);
-      });
-      VERA.irTela('mt5');
-    },
-    verCatalogo: function () {
-      var grid = document.getElementById('mCatGrid');
-      grid.innerHTML = '';
-      Object.keys(GUIAS).forEach(function (key) {
-        var g = GUIAS[key];
-        var card = document.createElement('button');
-        card.className = 'carta-cat';
-        card.innerHTML =
-          '<img src="' + g.img + '" alt="">' +
-          '<h3 style="color:' + g.cor + '">' + g.nome + '</h3>' +
-          '<p class="tag" style="color:' + g.cor + '">' + g.linha + '</p>' +
-          '<p>' + g.desc + '</p>';
-        card.onmouseenter = function () { card.style.borderColor = g.cor; };
-        card.onmouseleave = function () { card.style.borderColor = ''; };
-        card.onclick = function () { E.ramo = null; VERA.mostrarGuia(key); };
-        grid.appendChild(card);
-      });
-      VERA.irTela('mtCat');
-    },
-    /* Abre o modal direto na lista dos 4 Guias (sem o quiz) */
-    escolherDireto: function () {
-      E.ramo = E.q1 = E.q2 = E.q3 = null;
-      E.q1Txt = E.q2Txt = null;
-      modal.classList.add('aberto');
-      document.body.classList.add('modal-travado');
-      VERA.verCatalogo();
-    },
-    montarContexto: function () {
-      var partes = [];
-      if (E.ramo === 'a') partes.push('Chegou atravessando um momento difícil.');
-      else if (E.ramo === 'b') partes.push('Veio explorar ideias novas e conhecer VERA.');
-      if (E.q1Txt) partes.push('Sobre o momento de vida, indicou: "' + E.q1Txt + '".');
-      if (E.q2Txt) partes.push('Sobre o que ajuda/quer explorar, indicou: "' + E.q2Txt + '".');
-      return partes.join(' ');
-    },
-    caminharCom: function () {
-      var key = E.escolhido;
-      var ctx = VERA.montarContexto();
-      var ramo = E.ramo;
-      VERA.fecharModal();
-      /* Abre a conversa com o Guia escolhido, com o contexto do quiz */
-      function abrir() {
-        if (window.VERAChat) window.VERAChat.abrir(key, GUIAS[key], ctx, ramo);
-      }
-      if (window.VERAChat) abrir();
-      else setTimeout(abrir, 300); /* fallback: chat ainda carregando */
-    },
-    marcarGuiaNoForm: function (key) {
-      var g = GUIAS[key];
-      if (!g) return;
-      var banner = document.getElementById('banner-guia');
-      if (!banner) return;
-      document.getElementById('banner-guia-nome').textContent = g.nome;
-      document.getElementById('banner-guia-nome').style.color = g.cor;
-      document.getElementById('banner-guia-sub').textContent =
-        'Seu Guia está esperando. Cadastre-se para caminhar com ' + g.nome + ' quando os Guias acordarem.';
-      banner.style.display = 'block';
-      banner.style.borderColor = g.cor;
-      var campo = document.getElementById('campo-guia');
-      if (campo) campo.value = g.nome;
-    },
-    /* Botão flutuante para quem já tem Guia: abre o chat direto, sem o quiz */
-    injetarBotaoGuia: function () {
-      var key;
-      try { key = localStorage.getItem('vera_guia'); } catch (e) { key = null; }
-      if (!key || !GUIAS[key]) return;
-      var g = GUIAS[key];
-      var existente = document.getElementById('vera-botao-guia');
-      var b = existente || document.createElement('button');
-      b.id = 'vera-botao-guia';
-      b.type = 'button';
-      b.textContent = '💬 Falar com ' + g.nome;
-      b.setAttribute('aria-label', 'Abrir conversa com ' + g.nome);
-      b.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9990;display:inline-flex;' +
-        'align-items:center;gap:8px;padding:12px 18px;border:none;border-radius:30px;background:' + g.cor +
-        ';color:' + g.txtBtn + ';font-weight:600;font-size:.95rem;cursor:pointer;' +
-        'box-shadow:0 8px 24px rgba(0,0,0,.35);font-family:inherit';
-      b.onclick = function () {
-        function abrir() { if (window.VERAChat) window.VERAChat.abrir(key, GUIAS[key], '', 'retorno'); }
-        if (window.VERAChat) abrir(); else setTimeout(abrir, 300);
-      };
-      if (!existente) document.body.appendChild(b);
+  modal.addEventListener('click', function (e) {
+    var t = e.target.closest('button');
+    if (e.target === modal || (t && t.hasAttribute('data-fechar'))) return fecharDialogo();
+    if (!t) return;
+    if (t.hasAttribute('data-ir')) irTela(t.getAttribute('data-ir'));
+    else if (t.hasAttribute('data-catalogo')) verCatalogo();
+    else if (t.hasAttribute('data-ramo')) {
+      modal.querySelectorAll('#mt1 .op').forEach(function (b) { b.classList.remove('ok'); }); t.classList.add('ok');
+      E.ramo = t.getAttribute('data-ramo'); E.q1 = E.q2 = E.q1Txt = E.q2Txt = null;
+      opcoes('mp2ops', 'mbtn2', PERGUNTAS[E.ramo][0].ops, 'q1');
+      document.getElementById('mp2q').textContent = PERGUNTAS[E.ramo][0].q;
+      setTimeout(function () { irTela('mt2'); }, 260);
     }
+    else if (t.id === 'mbtn2') { document.getElementById('mp3q').textContent = PERGUNTAS[E.ramo][1].q; opcoes('mp3ops', 'mbtn3', PERGUNTAS[E.ramo][1].ops, 'q2'); irTela('mt3'); }
+    else if (t.id === 'mbtn3') { opcoes('mp4ops', 'mbtn4', L.ceuOps, 'q3'); irTela('mt4'); }
+    else if (t.id === 'mbtn4') revelar();
+    else if (t.id === 'mgBtn') { var k = E.escolhido, c = contexto(), r = E.ramo; fecharDialogo(); conversar(k, c, r); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('aberto')) fecharDialogo();
+    if (e.key === 'Escape' && links && links.classList.contains('aberto')) fecharMenu();
+  });
+
+  /* ---------- Botão de retorno para quem já tem Guia ---------- */
+  function botaoRetorno() {
+    var key; try { key = localStorage.getItem('vera_guia'); } catch (e) { key = null; }
+    if (!key || !GUIAS[key]) return;
+    var g = GUIAS[key], b = document.getElementById('vera-botao-guia') || document.createElement('button');
+    b.id = 'vera-botao-guia'; b.type = 'button'; b.className = 'botao botao-pequeno botao-guia-flutuante';
+    b.style.background = g.cor; b.style.color = g.txtBtn;
+    b.textContent = L.falarCom + g.nome;
+    b.onclick = function () { conversar(key, '', 'retorno'); };
+    if (!b.parentNode) document.body.appendChild(b);
+  }
+
+  /* ---------- API pública ---------- */
+  window.VERA = {
+    abrirModal: function () { abrirDialogo(); },
+    escolherDireto: function () { abrirDialogo('cat'); },
+    conversar: conversar,
+    guias: GUIAS,
+    injetarBotaoGuia: botaoRetorno
   };
 
-  /* ---------- Link discreto "Já sei meu Guia" na barra superior ---------- */
-  (function () {
-    var navLinks = document.querySelector('.nav-links');
-    if (!navLinks || document.getElementById('nav-ja-sei')) return;
-    var li = document.createElement('li');
-    var a = document.createElement('a');
-    a.id = 'nav-ja-sei';
-    a.href = '#';
-    a.textContent = 'Já sei meu Guia';
-    a.onclick = function () { VERA.escolherDireto(); return false; };
-    li.appendChild(a);
-    var cta = navLinks.querySelector('.nav-cta');
-    if (cta && cta.parentNode && cta.parentNode.parentNode === navLinks) {
-      navLinks.insertBefore(li, cta.parentNode);
-    } else {
-      navLinks.appendChild(li);
-    }
-  })();
+  /* Gatilhos declarativos no HTML */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-abrir-guia], [data-conversar]');
+    if (!a) return;
+    e.preventDefault();
+    if (a.hasAttribute('data-conversar')) conversar(a.getAttribute('data-conversar'), '', 'b');
+    else abrirDialogo(a.getAttribute('data-abrir-guia') === 'cat' ? 'cat' : null);
+  });
 
-  /* ---------- Botão flutuante "Falar com [Guia]" (se já houver Guia salvo) ---------- */
-  VERA.injetarBotaoGuia();
+  botaoRetorno();
 
-  /* ---------- ?guia=sol na URL ---------- */
-  var params = new URLSearchParams(window.location.search);
-  var key = params.get('guia');
-  if (key && GUIAS[key]) {
-    VERA.marcarGuiaNoForm(key);
-    if (window.location.hash === '#lista') {
-      setTimeout(function () {
-        var el = document.getElementById('lista');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 400);
-    }
-  }
+  /* Manifesto expansível */
+  var abrirM = document.getElementById('abrir-manifesto'), man = document.getElementById('manifesto-completo');
+  if (abrirM && man) abrirM.addEventListener('click', function () {
+    var aberto = man.classList.toggle('aberto');
+    abrirM.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+    abrirM.textContent = aberto ? abrirM.getAttribute('data-fechar-txt') : abrirM.getAttribute('data-abrir-txt');
+  });
 
-  /* ---------- Manifesto expansível (se existir na página) ---------- */
-  var abrir = document.getElementById('abrir-manifesto');
-  if (abrir) {
-    abrir.addEventListener('click', function () {
-      var m = document.getElementById('manifesto-completo');
-      var aberto = m.classList.toggle('aberto');
-      this.textContent = aberto ? 'Recolher o manifesto' : 'Ler o manifesto completo';
-    });
-  }
+  /* Ano no rodapé */
+  document.querySelectorAll('[data-ano]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
