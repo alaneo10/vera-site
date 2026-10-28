@@ -247,3 +247,13 @@ body.modal-travado { overflow: hidden; }
 .outros p { color: var(--suave); font-size: 0.82rem; margin-bottom: 0.9rem; text-align: center; }
 .outros-lista { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
 .outro { background: none; border: 1px solid var(--borda); color: var(--suave); font-family: inherit; font-size: 0.82rem; padding: 5px 14px; border-radius: 999px; cursor: pointer; transition: border-color 0.15s; }
+
+/* Acessibilidade: respeita quem pediu menos movimento no sistema */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

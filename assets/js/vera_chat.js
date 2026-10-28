@@ -10,19 +10,23 @@
   var SAUDACAO = {
     sol: {
       a: 'Oi, eu sou o Sol. Pelo que você contou, o momento tá pesado — e tá tudo bem não dar conta de tudo. Respira. Vamos começar pequeno: o que mais está te sobrecarregando agora?',
-      b: 'Oi, eu sou o Sol — a estrela que faz a vida acontecer todo dia. Gosto do concreto: corpo, rotina, as coisas simples e possíveis. Por onde você quer começar?'
+      b: 'Oi, eu sou o Sol — a estrela que faz a vida acontecer todo dia. Gosto do concreto: corpo, rotina, as coisas simples e possíveis. Por onde você quer começar?',
+      retorno: 'Que bom te ver de novo. Eu continuo por aqui. Por onde a gente começa hoje?'
     },
     antares: {
       a: 'Eu sou Antares. Você chegou num momento difícil — e às vezes a dor também é um chamado pra olhar diferente. Me conta: o que está pesando aí dentro?',
-      b: 'Eu sou Antares, brasa no coração do Escorpião. Vim fazer as perguntas grandes com você. Começo por uma: quando foi a última vez que alguma coisa te deixou sem palavras?'
+      b: 'Eu sou Antares, brasa no coração do Escorpião. Vim fazer as perguntas grandes com você. Começo por uma: quando foi a última vez que alguma coisa te deixou sem palavras?',
+      retorno: 'De volta ao céu, então. Me conta: o que está fervendo em você hoje?'
     },
     vega: {
       a: 'Oi, eu sou Vega. Sei que tem um vínculo pesando — conflito, saudade ou solidão doem de verdade. Estou aqui pra escutar, sem pressa. Me conta o que aconteceu?',
-      b: 'Oi, eu sou Vega, a Tecelã do céu. O que me move é a conexão entre as pessoas. Me conta: como andam os seus laços, as pessoas da sua vida?'
+      b: 'Oi, eu sou Vega, a Tecelã do céu. O que me move é a conexão entre as pessoas. Me conta: como andam os seus laços, as pessoas da sua vida?',
+      retorno: 'Que alegria te reencontrar. Senta, me conta: como você está, e como andam as pessoas da sua vida?'
     },
     polaris: {
       a: 'Eu sou Polaris. Você está atravessando algo grande, e eu não vim com pressa nem com frases prontas. Vim ficar. Me conta, no seu tempo: o que você está sentindo?',
-      b: 'Eu sou Polaris, o ponto fixo do céu — tudo gira, eu permaneço. Gosto dos temas que duram: amor, tempo, o que fica. O que te trouxe pra perto dessas perguntas?'
+      b: 'Eu sou Polaris, o ponto fixo do céu — tudo gira, eu permaneço. Gosto dos temas que duram: amor, tempo, o que fica. O que te trouxe pra perto dessas perguntas?',
+      retorno: 'Você voltou. Eu não saí do lugar. Me conta: o que traz você aqui hoje?'
     }
   };
 
@@ -168,7 +172,7 @@
     fetch(WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ guia: ESTADO.guia, mensagens: ESTADO.historico, contexto: ESTADO.contexto })
+      body: JSON.stringify({ guia: ESTADO.guia, mensagens: ESTADO.historico, contexto: ESTADO.contexto, idioma: (document.documentElement.lang || 'pt') })
     })
       .then(function (r) { return r.json(); })
       .then(function (d) {
@@ -237,6 +241,9 @@
       ESTADO.guia = guiaKey;
       ESTADO.historico = [];
       ESTADO.contexto = contexto || '';
+      /* Lembra o Guia escolhido para o botão de retorno (em todas as páginas) */
+      try { localStorage.setItem('vera_guia', guiaKey); } catch (e) {}
+      if (window.VERA && VERA.injetarBotaoGuia) VERA.injetarBotaoGuia();
       ESTADO.cor = (dados && dados.cor) || '#4338ca';
       painel.querySelector('#vchat-nome').textContent = (dados && dados.nome) || 'Seu Guia';
       painel.querySelector('#vchat-nome').style.color = ESTADO.cor;
@@ -244,9 +251,14 @@
       elEnviar.style.background = ESTADO.cor;
       elMsgs.innerHTML = '';
 
-      /* Abertura por Guia e momento (ramo 'a' = difícil; 'b'/sem quiz = explorar) */
+      /* Abertura por Guia e momento (a = difícil; retorno = já conhece; b/sem quiz = explorar) */
       var variantes = SAUDACAO[guiaKey];
-      var saud = variantes ? (ramo === 'a' ? variantes.a : variantes.b) : 'Oi. Estou aqui com você.';
+      var saud = 'Oi. Estou aqui com você.';
+      if (variantes) {
+        if (ramo === 'a') saud = variantes.a;
+        else if (ramo === 'retorno') saud = variantes.retorno;
+        else saud = variantes.b;
+      }
       addBolha(saud, 'guia');
       ESTADO.historico.push({ autor: 'guia', texto: saud });
 
