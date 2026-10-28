@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://somosvera.com.br/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/en/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/principios.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/principios.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/principles.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/principios.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/en/principles.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/principios.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/principles.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/principios.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/guias.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/guias.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/guias.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/en/guides.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/guias.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/guias.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/livro.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/livro.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/book.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/livro.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/en/book.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/livro.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/book.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/livro.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/deverdade.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/deverdade.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/for-real.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/deverdade.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://somosvera.com.br/en/for-real.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://somosvera.com.br/deverdade.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://somosvera.com.br/en/for-real.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://somosvera.com.br/deverdade.html"/>
+    <priority>0.8</priority>
+  </url>
+</urlset>

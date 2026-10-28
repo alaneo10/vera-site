@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /guias/
+
+Sitemap: https://somosvera.com.br/sitemap.xml
