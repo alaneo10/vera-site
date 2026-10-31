@@ -187,9 +187,15 @@ em { font-style: italic; }
 }
 .ceu-legenda .ausentes { display: block; margin-top: 0.5rem; font-style: italic; font-family: var(--serif); font-size: 0.95rem; color: var(--tinta-2); }
 @media (max-width: 760px) {
-  .ceu-texto .envelope { grid-template-columns: 1fr; }
+  /* no celular o texto entra no fluxo: a seção cresce se precisar, e o título nunca passa por baixo do menu */
+  .ceu-hero { height: auto; min-height: 100svh; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; }
+  .ceu-texto { position: relative; bottom: auto; padding: 6.5rem 0 2.5rem; }
+  .ceu-texto .envelope { grid-template-columns: 1fr; gap: 1.6rem; }
+  .ceu-texto h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); line-height: 1.06; margin-bottom: 1.1rem; }
+  .ceu-texto .lead { font-size: 1rem; margin-bottom: 1.6rem; }
   .ceu-legenda { justify-self: start; text-align: left; }
-  .ceu-hero::after { height: 70%; }
+  .ceu-legenda .ausentes { font-size: 0.9rem; }
+  .ceu-hero::after { height: 75%; }
 }
 
 /* ---------- Manifesto ---------- */
